@@ -1,4 +1,86 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+    --backgroud: #dddddd;
+    --blanco: #fff;
+}
+
+body{
+    background-color: var(--backgroud);
+}
+
+.content {
+    max-width: 120rem;
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    box-sizing: border-box;
+    font-family: "Roboto";
+}
+
+/*ASIDE*/
+
+#Category-aside{
+    background-color: var(--blanco);
+    padding: 18px;
+}
+
+#Category-aside h3 {
+  margin: 0 0 12px;
+  font-size: 2rem;
+}
+
+#Category-aside ul {
+  margin: 0;
+  padding-left: 18px;
+  line-height: 1.9;
+  font-size: 1.5rem;
+}
+
+
 .main-content {
+    margin: 4rem 2rem;
     display: flex;
     flex-direction: column;
+    background-color: var(--backgroud);
+    min-width: 0;
+}
+
+
+.main-content section{
+    margin-bottom:  2rem;
+}
+
+
+
+.comics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 20px;
+}
+
+.comic .imagen-comic {
+  width: 50%;
+  height: 100%;           
+  display: block;
+  overflow: hidden;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background: #fff;
+}
+
+.comic .imagen-comic img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;       
+  display: block;
+}
+
+.main-content h2 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+
 }
