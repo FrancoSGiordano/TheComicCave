@@ -1,0 +1,15 @@
+
+.content {
+    max-width: 120rem;
+    display: grid;
+    grid-template-columns: 15% 85%;
+    box-sizing: border-box;
+    font-family: "Roboto";
+    gap: 2rem;
+}
+
+
+.main-content{
+  padding-top: 20px;
+  padding-bottom: 60px;
+}

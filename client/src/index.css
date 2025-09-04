@@ -1,0 +1,14 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+    --backgroud: #dddddd;
+    --blanco: #3f3f3f;
+}
+
+body{
+    background-color: var(--backgroud);
+}

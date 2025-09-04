@@ -1,0 +1,10 @@
+.comics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(89px, 12rem));
+  gap: 30px;               
+  align-items: start;       
+  align-content: start;     
+  justify-items: start;  
+  padding-bottom: 2rem; 
+  padding-top: 2rem; 
+}

@@ -1,0 +1,30 @@
+.category-aside{
+    background-color: var(--blanco);
+    padding: 18px;
+    min-height: 100vh;
+}
+
+.category-aside h3 {
+  text-align: center;
+  font-size: 1.5rem;
+  color: #fff;
+  padding-bottom: 1rem;
+}
+
+.category-aside ul {
+  text-align: center;
+  list-style-type: none;
+  line-height: 1.9;
+  font-size: 1rem;
+  color: #fff;
+}
+
+.category-aside li {
+  cursor: pointer;
+  
+}
+
+.category-aside a{
+  color: inherit;
+  text-decoration: none;
+}
