@@ -7,19 +7,20 @@ type ComicSectionProps = {
 }
 
 export default function ComicSection({title} : ComicSectionProps) {
-
-    
-    return (
-      <>
-        <h2>{title}</h2>
-        <div className='comics'>
-            {comics.filter(comic => comic.publisher.toLowerCase() === title.toLowerCase()).map((comic) =>
-               <ComicCard
-                name={comic.name}
-                image={comic.image}
-               />
-            )}   
-        </div>
-      </>
-    )
+  return (
+    <>
+      <h2>{title}</h2>
+      <div className='comics'>
+        {comics
+          .filter(comic => comic.publisher.toLowerCase() === title.toLowerCase())
+          .map((comic) => (
+            <ComicCard
+              comic={comic}                       // <-- pasamos el objeto completo
+              publisher={comic.publisher}
+              onClick={() => console.log('Abrir detalle de', comic.name)}
+            />
+        ))}
+      </div>
+    </>
+  )
 }

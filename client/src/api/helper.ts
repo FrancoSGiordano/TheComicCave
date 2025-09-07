@@ -19,6 +19,19 @@ export const comics = [
     },
     {
         publisher: "Marvel",
+        name: "Alien: Black, White & Blood",
+        image: "/AlienBlackWhiteBlood.jpg"
+
+    },
+    {
+        publisher: "Marvel",
+        name: "Alien: Black, White & Blood",
+        image: "/AlienBlackWhiteBlood.jpg"
+
+    },
+    
+    {
+        publisher: "Marvel",
         name: "Alien Galaxy of Nightmares",
         image: "/AlienGalaxyOfNightmares.jpg"
 

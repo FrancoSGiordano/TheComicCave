@@ -1,5 +1,3 @@
-
-
 import { useState } from 'react'
 import ComicSection from '../../components/ComicSection/ComicSection.tsx'
 import Footer from '../../components/Footer/Footer.tsx'
@@ -12,46 +10,61 @@ import SideBar from '../../components/SideBar/SideBar.tsx'
 export default function Home() {
 
   const [value, setValue] = useState<string | null>(null)
-
+  const [sideBarOpen, setSideBarOpen] = useState(false)
+  const [searchTerm, setSearchTerm] = useState("")
   
 
   return (
-    <>
-        <Header/>
-        <div className='content'>
-            
-            <SideBar
-              selectPublisher={setValue}
-            />
+    <>  
+        <div className='totalbody'>
+          <Header
+            onToggleSideBar={()=>setSideBarOpen(!sideBarOpen)}
+          
+          
+          
+          />
+            <div className={`content ${sideBarOpen ? 'sidebar-open' : ''}`}>
+              
+              <SideBar
+                isOpen={sideBarOpen}
+                selectPublisher={setValue}
+                searchTerm={searchTerm}
+                onSearchChange={setSearchTerm}
+              />
 
-            <main className='main-content'>
-            
-               {value ? (
-                <ComicSection
-                  title={value}
-                />
-               ) : (
-               <>
-                  <ComicSection
-                      title='Marvel'
+              <main className='main-content'>
+                <div className='publishersection'>
+                  {value ? (
+                    <ComicSection
+                      title={value}
                     />
+                    ) : (
+                   <>
+                      <ComicSection
+                          title='Marvel'
+                        />
 
-                  <ComicSection
-                    title='DC Comics'
-                  />
+                      <ComicSection
+                        title='DC Comics'
+                      />
 
-                  <ComicSection
-                    title='Others'
-                  />
-               </>
-                    
-              )}
-                  
-            </main>
+                      <ComicSection
+                        title='Others'
+                      />
+                  </>
+                        
+                  )}
 
-          </div>
+                </div>
+
+              </main>
+
+            </div>
+          
+          <Footer/>
+
+        </div>
         
-        <Footer/>
     </>
   )
 }
