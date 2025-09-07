@@ -8,8 +8,10 @@ type ComicSectionProps = {
 
 export default function ComicSection({title} : ComicSectionProps) {
   return (
-    <>
-      <h2>{title}</h2>
+    <section className='comic-section'>
+      <div className='title-section'>
+        <h2>{title}</h2>
+      </div>
       <div className='comics'>
         {comics
           .filter(comic => comic.publisher.toLowerCase() === title.toLowerCase())
@@ -21,6 +23,6 @@ export default function ComicSection({title} : ComicSectionProps) {
             />
         ))}
       </div>
-    </>
+    </section>
   )
 }

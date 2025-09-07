@@ -1,18 +1,36 @@
-.comics {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(89px, 12rem));
-  gap: 30px;               
-  align-items: start;       
-  align-content: start;     
-  justify-items: start;  
-  padding-bottom: 2rem; 
-  padding-top: 2rem; 
+:root{
+  --section-title: #E8E3D3;
 }
 
+.comic-section{
+  margin-bottom: 2rem;
+  padding: 0.75rem 0;
+}
+
+
+
 h2{
+  margin: 0;
+  margin-bottom: 2rem;
   font-family: 'Bangers';
   font-size: 2rem;
   letter-spacing: 0.1rem;
-  color: #E8E3D3;
+  color: var(--section-title);
   font-weight: 100;
 }
+
+.comics{
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+
+@media (min-width: 640px){
+  .comics{ grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (min-width: 1280px){
+  .comics{ grid-template-columns: repeat(4, 1fr); }
+}
+

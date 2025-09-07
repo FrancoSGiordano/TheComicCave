@@ -72,10 +72,9 @@ export default function ComicCard({ comic, publisher, onClick } : ComicCardProps
           onClick={handleFavoriteClick}
           className={`favorite-button ${isFavorite ? 'is-fav' : ''}`}
           aria-pressed={isFavorite}
-          aria-label={isFavorite ? 'Quitar de favoritos' : 'Agregar a favoritos'}
         >
           <svg
-            className="icon"
+            className="icono"
             viewBox="0 0 24 24"
             width={20}
             height={20}

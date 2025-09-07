@@ -33,29 +33,34 @@ export default function Home() {
               />
 
               <main className='main-content'>
-                <div className='publishersection'>
-                  {value ? (
-                    <ComicSection
-                      title={value}
-                    />
-                    ) : (
-                   <>
+                <div className='container'>
+                  <div className='publishersection'>
+                    {value ? (
                       <ComicSection
-                          title='Marvel'
+                        title={value}
+                      />
+                      ) : (
+                    <>
+                        <ComicSection
+                            title='Marvel'
+                          />
+
+                        <ComicSection
+                          title='DC Comics'
                         />
 
-                      <ComicSection
-                        title='DC Comics'
-                      />
+                        <ComicSection
+                          title='Others'
+                        />
+                    </>
+                          
+                    )}
 
-                      <ComicSection
-                        title='Others'
-                      />
-                  </>
-                        
-                  )}
+                  </div>
+
 
                 </div>
+               
 
               </main>
 
