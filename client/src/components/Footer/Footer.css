@@ -1,0 +1,22 @@
+footer {
+  margin-top: auto;
+  padding: 18px;
+  text-align:center;
+  color: var(--muted);
+  background-color: #0b0f12;
+  font-size: 0.9rem;
+  border-top: 1px solid rgba(255,255,255,0.02);
+}
+
+.footer-text {
+    font-family: 'Roboto';
+    font-weight: bold;
+    font-size: 1rem;
+    text-align: center;
+    align-items: center;
+    margin: 0;
+}
+
+.copy{
+    margin-bottom: 0.5rem;
+}
