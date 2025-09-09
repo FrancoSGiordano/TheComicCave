@@ -5,9 +5,15 @@ import Header from '../../components/Header/Header.tsx'
 import '../../index.css'
 import './Home.css'
 import SideBar from '../../components/SideBar/SideBar.tsx'
+import type { FavoriteState } from '../../types/index.ts'
+import { useFavoritesStore } from '../../store/favoriteStore.ts'
 
 
 export default function Home() {
+
+
+
+  const {quantity} = useFavoritesStore()
 
   const [value, setValue] = useState<string | null>(null)
   const [sideBarOpen, setSideBarOpen] = useState(false)
@@ -19,9 +25,7 @@ export default function Home() {
         <div className='totalbody'>
           <Header
             onToggleSideBar={()=>setSideBarOpen(!sideBarOpen)}
-          
-          
-          
+            quantity={quantity}
           />
             <div className={`content ${sideBarOpen ? 'sidebar-open' : ''}`}>
               
@@ -42,14 +46,17 @@ export default function Home() {
                       ) : (
                     <>
                         <ComicSection
+                            
                             title='Marvel'
                           />
 
                         <ComicSection
+                          
                           title='DC Comics'
                         />
 
                         <ComicSection
+                          
                           title='Others'
                         />
                     </>

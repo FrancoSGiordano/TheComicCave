@@ -1,34 +1,40 @@
+import { useFavoritesStore } from '../../store/favoriteStore'
+import type { Comic, FavoriteComic } from '../../types'
 import './ComicCard.css'
-import { useState, useEffect } from "react"
+import { useEffect, useState } from "react"
 
-interface Comic {
-  name?: string
-  image?: string
-  publisher?: string
-  isFavorite?: boolean
-}
 
 type ComicCardProps = {
-  comic?: Comic
-  publisher?: string
+  comic: Comic
   onClick?: () => void
 }
 
-export default function ComicCard({ comic, publisher, onClick } : ComicCardProps) {
+export default function ComicCard({ comic, onClick} : ComicCardProps) {
   // inicializador seguro (evita crashes si comic es undefined)
-  const [isFavorite, setIsFavorite] = useState<boolean>(() => comic?.isFavorite ?? false)
+  const [isFavorite, setIsFavorite] = useState<boolean>(false)
 
-  // opcional: sincronizar si el prop cambia
+  const { addFavorite, removeFavorite, favorites } = useFavoritesStore()
+
   useEffect(() => {
-    if (typeof comic?.isFavorite !== "undefined") {
-      setIsFavorite(comic.isFavorite!)
-    }
-  }, [comic?.isFavorite])
+    setIsFavorite(favorites.some((fav) => fav.id === comic.id));
+  }, [favorites, comic.id]);
 
   const handleFavoriteClick = (e: React.MouseEvent) => {
     e.stopPropagation()
-    setIsFavorite(prev => !prev)
-    // opcional: acá podés llamar a una API para persistir el cambio
+
+    if(isFavorite){
+        removeFavorite(comic.id)   
+    } else {
+      const favoriteComic : FavoriteComic = {
+        id: comic.id,
+        name: comic.name,
+        image: comic.image,
+        publisher: comic.publisher
+      }
+      addFavorite(favoriteComic)
+    }
+
+    setIsFavorite(!isFavorite)
   }
 
   // placeholder si no hay comic todavía (evita crash)

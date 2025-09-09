@@ -17,8 +17,8 @@ export default function ComicSection({title} : ComicSectionProps) {
           .filter(comic => comic.publisher.toLowerCase() === title.toLowerCase())
           .map((comic) => (
             <ComicCard
+              key={comic.id}
               comic={comic}                       // <-- pasamos el objeto completo
-              publisher={comic.publisher}
               onClick={() => console.log('Abrir detalle de', comic.name)}
             />
         ))}
