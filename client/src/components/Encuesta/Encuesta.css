@@ -1,0 +1,311 @@
+:root{
+  --form-bg: #1A1F2E;              /* paneles / cards */
+  --input-bg: #0f141b;            /* panel modal */
+  --text: #e8e3d3;               /* texto principal (marfil) */
+  --label: #a8a29e;              /* texto secundario */
+  --accent: rgba(232,227,211,0.1);             /* amarillo “The Comic Cave” */
+  --border: rgba(232,227,211,0.08);
+  --border-strong: rgba(232,227,211,0.14);
+}
+
+.form-section{
+  margin-bottom: 2rem;
+  padding: 0.75rem 0;
+
+}
+
+h2{
+  color: var(--text);
+  letter-spacing: .06em;
+  font-weight: 800;
+  margin: 8px 0 18px;
+}
+
+form{
+  background: var(--form-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: 0 8px 24px rgba(0,0,0,.45);
+  padding: 20px;
+  max-width: 760px;
+}
+
+/*fieldsets*/
+fieldset{
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px 16px;
+  margin: 12px 0 18px;
+}
+
+legend{
+  padding: 0 10px;
+  font-size: .95rem;
+  color: var(--text);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+}
+
+/*datos personale*/
+.personal-data{
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px 16px;
+}
+
+.field{
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.field label{
+  color: var(--label);
+  font-size: 0.9rem;
+  margin-right: 6px;
+}
+
+.input-title{
+    display: flex;
+    font-size: 0.9rem;
+}
+
+.error{
+    color: rgb(177, 2, 2);
+}
+
+input,
+select,
+textarea{
+  background: var(--input-bg);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 12px;
+}
+
+
+input::placeholder, textarea::placeholder{
+  color: #b7b2a7;
+  opacity: .6;
+}
+
+input:focus,
+select:focus,
+textarea:focus{
+    outline: none;
+}
+
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible{
+  box-shadow: 0 0 0 1.5px #00D0FF46;
+  border-color: transparent;
+
+
+}
+
+select{
+  appearance: none;
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--label) 50%),
+    linear-gradient(135deg, var(--label) 50%, transparent 50%);
+  background-position:
+    calc(100% - 18px) calc(1.2em - 1px),
+    calc(100% - 12px) calc(1.2em - 1px);
+  background-size: 6px 6px, 6px 6px;
+  background-repeat: no-repeat;
+}
+
+/* valoración*/
+.valoration{
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+}
+
+
+
+.valoration-option{
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  background: var(--input-bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 12px;
+}
+
+.valoration-option label{
+  color: var(--text);
+}
+
+input[type="radio"]{
+  width: 18px;
+  height: 18px;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
+#comentario{
+  min-height: 110px;
+  resize: vertical;
+}
+
+/*botones*/
+.buttons{
+  display: flex;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.buttons button{
+  cursor: pointer;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--input-bg);
+  color: var(--text);
+  padding: 10px 14px;
+  font-weight: 600;
+  transition: transform .08s ease;
+}
+
+/*boton enviar*/
+.buttons button:first-child{              
+    background: green;
+    box-shadow: 0 6px 18px rgba(0,0,0,.45);
+}
+
+/*cancelar*/
+.buttons button:nth-child(2){             
+    background: rgb(78, 5, 5);
+    box-shadow: 0 6px 18px rgba(0,0,0,.45);
+
+}
+/*restablecer*/
+.buttons button:last-child{               
+  border-color: var(--border);
+}
+
+.buttons button:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px rgba(0,0,0,.45);
+}
+
+.buttons button:active{
+  transform: translateY(1px);
+  box-shadow: 0 5px 15px rgba(0,0,0,.45);
+}
+
+
+/*Modal*/
+.modal{
+  position: fixed;
+  inset: 0;
+  display: none;
+  place-items: center;
+  background: rgba(0,0,0,.55);
+  z-index: 90;
+  padding: 20px;
+}
+
+.modal.open{
+  display: grid;
+}
+
+
+
+.modal-container{
+  background: var(--form-bg);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  width: min(680px, 100%);
+  padding: 18px;
+  margin-top: 2rem;
+}
+
+.modal-header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.modal-header h2{
+  margin: 0;
+  color: var(--text);
+}
+
+
+
+
+
+
+.close-modal button{
+  display: inline-grid;
+  place-items: center;
+  background: transparent;
+  border: transparent;
+  color: var(--text);
+  padding: 6px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform .08s ease;
+}
+.close-modal .icon{
+  width: 22px;
+  height: 22px;
+}
+
+.close-modal button:hover{ 
+    background: rgba(255,255,255,0.03);
+    transform: translateY(-1px); 
+
+}
+.modal p{
+  color: var(--label);
+  margin: 8px 0;
+  border-bottom: 1px dashed var(--border);
+  padding-bottom: 6px;
+}
+
+.confirm-send{
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.confirm-send button{
+  background: green;
+  color: rgb(226, 226, 226);
+  border: 1px solid rgb(74, 124, 74);
+  border-radius: 12px;
+  padding: 10px 10px;
+  font-weight: 700;
+  cursor: pointer;
+  font-size: 15px;
+    transition: transform .08s ease;
+  box-shadow: 0 6px 18px rgba(0,0,0,.45);
+}
+
+.confirm-send button:active{
+  transform: translateY(1px);
+  box-shadow: 0 5px 15px rgba(0,0,0,.45);
+}
+
+.confirm-send button:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px rgba(0,0,0,.45);
+}
+
+@media (max-width: 640px){
+  form{ padding: 16px; }
+  .personal-data{
+    grid-template-columns: 1fr;
+  }
+  .valoration-option{
+    grid-template-columns: 1fr auto;
+  }
+}

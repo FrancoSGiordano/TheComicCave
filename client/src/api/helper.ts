@@ -69,5 +69,14 @@ export const comics = [
         name: "Altered Metal",
         image: "/AlteredMetal.jpg"
 
-    }    
+    },
+    {
+        id: 11,
+        publisher: "Ultimos lanzamientos",
+        name: "Altered Metal",
+        image: "/AlteredMetal.jpg"
+
+    },    
+
+   
 ]

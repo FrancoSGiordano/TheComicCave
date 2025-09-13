@@ -17,7 +17,10 @@ export default function SideBar({
 
   return (
     <>
-      
+      <div
+        className={`overlay ${isOpen ? 'show' : ''}`}
+        aria-hidden={!isOpen}
+      />
 
       <aside
         className={`category-aside ${isOpen ? 'open' : ''}`}
@@ -65,6 +68,9 @@ export default function SideBar({
             <li onClick={() => selectPublisher("Others")}>Otras</li>
           </ul>
         </div>
+
+        
+
       </aside>
     </>
   )

@@ -14,6 +14,7 @@
 *{
   margin:0;
   font-family: 'Roboto' ;
+  box-sizing: border-box;
 }
 
 /* Contenedor general (equivalente a min-h-screen) */
@@ -29,6 +30,7 @@
 .content {
   display:flex;
   padding-top: var(--header-h); /*dejo el espacio arriba de lo que ocupa el header*/
+  overflow-x: hidden;
 }
 
 
@@ -37,6 +39,7 @@
   padding: 28px 20px;
   background: var(--bg);
   color: var(--text);
+  
 }
 
 /* Contenedor interno con max-width centrado */

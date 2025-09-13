@@ -27,16 +27,7 @@
   transform: translateX(0);
 }
 
-/* mantener fijo en pantalla grande */
-@media (min-width: 1024px) {
-  .sidebar-overlay{ display: none !important; }
-  .category-aside{
-    position: sticky;
-    top: 4rem;
-    transform: translateX(0);
-    z-index: 30;
-  }
-}
+
 
 .categories {
   margin-top: 2rem;
@@ -123,10 +114,11 @@
 
 
 
-/* Small screens */
-@media (max-width: 420px){
+@media (max-width: 480px){
   :root{ --sidebar-width: 18rem; }
   .category-aside{ padding: 0.75rem; }
   .search-icon{ left: 0.6rem; width:16px; height:16px; }
   .search-input{ padding-left: 2.25rem; }
+  
+
 }
