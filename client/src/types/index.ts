@@ -1,5 +1,3 @@
-
-
 export type Comic = {
     id: number
     name: string
@@ -8,10 +6,18 @@ export type Comic = {
 }
 
 
-
-export type FavoriteComic = Pick<Comic, 'id' | 'name' | 'image' | 'publisher'>
-
 export type FavoriteState = {
-    favorite: FavoriteComic[]
+    favorite: ComicCardType[]
     quantity: number
+}
+
+export type ComicCardType = {
+    id: number;
+    title: string;
+    imageUrl: string;
+}
+
+export type Character = {
+    id: number
+    name: string
 }

@@ -1,11 +1,11 @@
 import { useFavoritesStore } from '../../store/favoriteStore'
-import type { Comic, FavoriteComic } from '../../types'
+import type { ComicCardType } from '../../types'
 import './ComicCard.css'
 import { useEffect, useState } from "react"
 
 
 type ComicCardProps = {
-  comic: Comic
+  comic: ComicCardType
   onClick?: () => void
 }
 
@@ -25,11 +25,10 @@ export default function ComicCard({ comic, onClick} : ComicCardProps) {
     if(isFavorite){
         removeFavorite(comic.id)   
     } else {
-      const favoriteComic : FavoriteComic = {
+      const favoriteComic : ComicCardType = {
         id: comic.id,
-        name: comic.name,
-        image: comic.image,
-        publisher: comic.publisher
+        title: comic.title,
+        imageUrl: comic.imageUrl,
       }
       addFavorite(favoriteComic)
     }
@@ -49,7 +48,7 @@ export default function ComicCard({ comic, onClick} : ComicCardProps) {
     )
   }
 
-  const title = comic.name ?? "Sin título"
+  const title = comic.title ?? "Sin título"
 
   return (
     <article
@@ -67,7 +66,7 @@ export default function ComicCard({ comic, onClick} : ComicCardProps) {
     >
       <div className="comic-image">
         <img
-          src={comic.image ?? '/placeholder.svg'}
+          src={comic.imageUrl ?? '/placeholder.svg'}
           alt={title}
           width="400"
           height="600"

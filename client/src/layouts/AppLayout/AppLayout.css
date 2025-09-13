@@ -1,0 +1,47 @@
+:root{
+  --bg: #0F1419;
+  --header-bg: #1A1F2E;
+  --surface: #111418;
+  --muted: #A8A29E;
+  --text: #E6EEF2;
+  --sidebar-w: 280px;
+  --header-h: 68px; 
+  --max-width: 1100px;
+  --gap: 1rem;
+  --radius: 10px;
+}
+
+*{
+  margin:0;
+  font-family: 'Roboto' ;
+}
+
+/* Contenedor general (equivalente a min-h-screen) */
+.totalbody{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  background: var(--header-bg);
+}
+
+
+
+.content {
+  display:flex;
+  padding-top: var(--header-h); /*dejo el espacio arriba de lo que ocupa el header*/
+  overflow-x: hidden;
+}
+
+
+.main-content {
+  flex: 1;
+  padding: 28px 20px;
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* Contenedor interno con max-width centrado */
+.main-content .container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+}

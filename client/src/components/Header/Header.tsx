@@ -1,59 +1,75 @@
 import './Header.css'
 import logo from '../../../public/logo.png'
+import { useNavigate } from 'react-router-dom'
 
 interface HeaderProps{
     onToggleSideBar: () => void
     quantity: number
+    isLanding: boolean
 }
 
-export default function Header({onToggleSideBar, quantity}: HeaderProps) {
+export default function Header({onToggleSideBar, quantity, isLanding}: HeaderProps) {
   
-  
+  const navigate = useNavigate()
+
   return (
     <>
         <header className="header">
             <div className="header-content">
                 <div className="titleButton">
-                    <button 
-                        className='menuButton'
-                        onClick={onToggleSideBar}
-                        aria-label="Abrir Filtros"
-                    >
-                    <svg xmlns="http://www.w3.org/2000/svg" 
-                        viewBox="0 0 24 24"
-                        width={24}
-                        height={24}
-                        stroke="currentColor"
-                        strokeWidth={1.5}
-                        fill="none"
-                        aria-hidden="true"
-                        focusable="false"
-                        className="icon"
+      
+                    {isLanding && 
+                        <>
+                            <button 
+                            className='menuButton'
+                            onClick={onToggleSideBar}
+                            aria-label="Abrir Filtros"
                         >
-                        <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-                        />
-                    </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" 
+                            viewBox="0 0 24 24"
+                            width={24}
+                            height={24}
+                            stroke="currentColor"
+                            strokeWidth={1.5}
+                            fill="none"
+                            aria-hidden="true"
+                            focusable="false"
+                            className="icon"
+                            >
+                            <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+                            />
+                        </svg>
 
 
-                    </button>
+                        </button>
+                    </> 
+                    }
+                    
 
-
-
-                    <div className="title">
-                        <h1 className="text-title">The Comic Cave</h1>
+                    <div className="title">  
+                        <h1 
+                            className="text-title"
+                            onClick={() => navigate('/')}
+                        > 
+                            The Comic Cave
+                        </h1>
                     </div>
                 </div>
 
                 
                 <div className="logo" aria-hidden="false">
-                    <img src={logo} alt="" />
+                    <img 
+                        src={logo} 
+                        alt="" 
+                        onClick={() => navigate('/')}
+                    />
                 </div>
 
                 <div className="favoriteSection">
-                    <button className='favorite'>
+                    <button className='favorite' onClick={() => navigate('/comics/favorites')}>
                     <svg
                         className="icon"
                         viewBox="0 0 24 24"
