@@ -1,6 +1,9 @@
 
 .publishersection {
   margin-bottom: 1.5rem;
+    padding: 28px 20px;
+  padding-top: 68px; /*dejo el espacio arriba de lo que ocupa el header*/
+
 }
 
 

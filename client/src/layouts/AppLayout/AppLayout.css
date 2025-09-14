@@ -28,14 +28,12 @@
 
 .content {
   display:flex;
-  padding-top: var(--header-h); /*dejo el espacio arriba de lo que ocupa el header*/
   overflow-x: hidden;
 }
 
 
 .main-content {
   flex: 1;
-  padding: 28px 20px;
   background: var(--bg);
   color: var(--text);
 }

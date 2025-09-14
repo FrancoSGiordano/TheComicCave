@@ -14,7 +14,7 @@ export default function Router() {
                     <Route path="/" element={<LandingPage/>} index></Route>
                     <Route path="/comics" element={<Home/>} ></Route>
                     <Route path="comics/favorites" element={<FavoritesView/>}></Route>
-                    <Route path="comics/details" element={<DetailsView/>}></Route>
+                    <Route path="comics/details/:id" element={<DetailsView/>}></Route>
                 </Route>
             </Routes>
         </BrowserRouter>

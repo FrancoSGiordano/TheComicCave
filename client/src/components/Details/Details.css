@@ -19,16 +19,14 @@
 
 .detail-overlay {
   position: absolute;
-  inset: 0;                   /* top:0; right:0; bottom:0; left:0; */
-  z-index: 1;                 /* debajo del contenido (que tendrá z-index:2) */
-  pointer-events: none;       /* importante: no bloquea clicks/hover */
+  inset: 0;                   
+  z-index: 1;                 
+  pointer-events: none;       
   background: rgba(6,7,9,0.85) 100%;
-  backdrop-filter: blur(8px); /* opcional: si querés blur */
-  will-change: opacity;       /* mejora rendimiento si animás opacity */
-  opacity: 1;                 /* podés animar esto con transition */
-  transition: opacity .3s ease;
+  backdrop-filter: blur(8px); 
 }
-/* header (botones top — share, etc.) */
+
+
 .detail-header{
   position: relative;
   z-index: 2; /* sobre el overlay */
@@ -66,7 +64,10 @@
 
 
 
-
+.shareSection{
+display: flex;
+gap: 5px;
+}
 
 /*compartir*/
 .share{
@@ -81,6 +82,36 @@
   align-items:center;
   justify-content:center;
   transition: transform .14s ease;
+}
+
+/*botón favorito */
+.favoritebutton {
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+  border: none;
+  background: black;
+  color: white;
+  cursor: pointer;
+}
+
+/*marcar favorito*/
+.favoritebutton.is-fav {
+  background: var(--corazon);
+}
+
+/*icono*/
+.favorite-button .icono
+{
+  display: block;
+  width: 18px;
+  height: 18px;
+  stroke: currentColor;
+  fill: none;
 }
 
 .buttonheader .icon{
@@ -166,9 +197,14 @@
     margin-top: 1rem;
     font-size: 0.98rem;
     line-height: 1.6;
-    color: white
+    color: white;
+    margin-bottom: 0.9rem;
 }
 
+.creators-container ul{
+  list-style: none;
+
+}
 
 
 /* RESPONSIVE: en pantallas pequeñas apilar verticalmente */

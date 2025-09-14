@@ -13,16 +13,22 @@ export default function AppLayout() {
     const {quantity} = useFavoritesStore()
     const [sideBarOpen, setSideBarOpen] = useState(true)
     const [searchTerm, setSearchTerm] = useState("")
-    const [isLanding, setIsLanding] = useState(location.pathname !== "/")
 
 
+    const isDetailsPath = (pathname: string) => {
+    return /^\/comics\/details(\/|$)/.test(pathname)
+  }
+
+  const [isLanding, setIsLanding] = useState(
+    () => location.pathname !== "/" && !isDetailsPath(location.pathname)
+  )
     useEffect(() => {
       const isMobile = window.innerWidth < 768
       setSideBarOpen(!isMobile)
     },[location.pathname])
 
     useEffect(() => {
-      setIsLanding(location.pathname !== "/")
+      setIsLanding(location.pathname !== "/" && !isDetailsPath(location.pathname))
     }, [location.pathname])
 
     return (
@@ -36,7 +42,7 @@ export default function AppLayout() {
                 <div className={`content ${sideBarOpen ? 'sidebar-open' : ''}`}>
                   
                   
-                  {location.pathname !== "/" && (
+                  {location.pathname !== "/" &&  !isDetailsPath(location.pathname) &&(
                       <SideBar
                         isOpen={sideBarOpen}
                         searchTerm={searchTerm}

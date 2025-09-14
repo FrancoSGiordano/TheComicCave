@@ -2,6 +2,7 @@ import { useFavoritesStore } from '../../store/favoriteStore'
 import type { ComicCardType } from '../../types'
 import './ComicCard.css'
 import { useEffect, useState } from "react"
+import { useNavigate } from 'react-router-dom';
 
 
 type ComicCardProps = {
@@ -10,7 +11,8 @@ type ComicCardProps = {
 }
 
 export default function ComicCard({ comic, onClick} : ComicCardProps) {
-  // inicializador seguro (evita crashes si comic es undefined)
+  const navigate = useNavigate()
+  
   const [isFavorite, setIsFavorite] = useState<boolean>(false)
 
   const { addFavorite, removeFavorite, favorites } = useFavoritesStore()
@@ -55,7 +57,7 @@ export default function ComicCard({ comic, onClick} : ComicCardProps) {
       className="comic"
       tabIndex={0}
       role="button"
-      onClick={() => onClick?.()}
+      onClick={() => navigate(`/comics/details/${comic.id}`)}
       onKeyDown={(e) => {
         if (e.key === "Enter" || e.key === " ") {
           e.preventDefault()

@@ -36,10 +36,13 @@ export default function LandingPage(){
             <div className='landing-container'>
                 <HeroBanner/>
             </div>
+            <div className='comicBody'>
                 <ComicSection
                     title='Novedades'
                     comics={newReleases}
-                />           
+                />  
+            </div>
+         
         </>
     )
 }

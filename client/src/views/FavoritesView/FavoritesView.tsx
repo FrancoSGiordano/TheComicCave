@@ -10,10 +10,14 @@ export default function FavoritesView() {
 
     return (
         <>
+        <div className='comicsBody'>
             <ComicSection
                 title='Favoritos'
                 comics={favorites}
             />
+
+        </div>
+
         </>
     )
 }

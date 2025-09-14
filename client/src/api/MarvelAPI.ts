@@ -1,5 +1,5 @@
 import md5 from "md5"
-import type { Character, ComicCardType } from "../types"
+import type { Character, ComicCardType, Creator, ComicDetails } from "../types"
 
 
 export type ComicFilters = {
@@ -40,7 +40,8 @@ export default async function fetchComics(filters: ComicFilters) {
         const comics: ComicCardType[] = data.data.results.map((c:any) => ({
             id: c.id,
             title: c.title,
-            imageUrl: `${c.thumbnail.path}/portrait_uncanny.${c.thumbnail.extension}`
+            imageUrl: `${c.thumbnail.path}/portrait_uncanny.${c.thumbnail.extension}`,
+            description: c.description
         }))
         console.log(comics)
         return comics
@@ -81,4 +82,66 @@ export async function getCharacters(query?: string, limit : number = 5){
 
     return characters
 
+}
+
+
+export async function fetchComicById(id: number | string): Promise<ComicDetails | null> {
+  if (!id) return null
+
+  const ts = new Date().getTime().toString()
+  const hash = md5(ts + privateKey + publicKey)
+
+  const params = new URLSearchParams({
+    ts,
+    apikey: publicKey,
+    hash,
+  })
+
+  const url = `${baseURL}/comics/${id}?${params.toString()}`
+
+  try {
+    const res = await fetch(url)
+    if (!res.ok) {
+      console.error("Marvel API error:", res.status, await res.text())
+      return null
+    }
+
+    const json = await res.json()
+    const result = json?.data?.results?.[0]
+    if (!result) return null
+
+    const thumb = result.thumbnail
+    const imageUrl =
+      thumb && thumb.path && thumb.extension && !thumb.path.includes("image_not_available")
+        ? `${thumb.path}/portrait_uncanny.${thumb.extension}`
+        : "/placeholder.svg"
+
+
+    const rawDate =
+    Array.isArray(result.dates) && result.dates.length > 0
+        ?  result.dates[0].date :  null;
+
+    const date = rawDate ? new Date(rawDate).toISOString() : null;
+
+    const creators: Creator[] = Array.isArray(result.creators?.items)
+      ? result.creators.items.map((c: any) => ({
+          name: c.name ?? "",
+          role: c.role ?? "",
+        }))
+      : []
+
+    const comic: ComicDetails = {
+      id: result.id,
+      title: result.title ?? "",
+      imageUrl,
+      description: result.description ?? "",
+      creators,
+      date: date?? ""
+    }
+
+    return comic
+  } catch (error) {
+    console.error("Error en fetchComicById:", error)
+    return null
+  }
 }
