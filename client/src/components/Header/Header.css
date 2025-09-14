@@ -143,6 +143,15 @@
 
 /*ocultar boton menu*/
 
+.header-bg{
+  width: 100%;
+  height: var(--height);   /* altura de la franja superior */
+  background: #1A1F2E;
+  z-index: 10;         
+}
+
+
+
 
 @media (max-width: 880px){
   .header-content{

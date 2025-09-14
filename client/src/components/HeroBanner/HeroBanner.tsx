@@ -9,8 +9,9 @@ export default function HeroBanner() {
 
     return (
       <section className="hero">
-        {/* imagen de fondo semántica (puede ser decorativa) */}
-        <img className="hero__img" src={banner} alt="" />
+        <div className='image-container'>
+          <img className="hero__img" src={banner} alt="" />
+        </div>
 
 
         <div className="hero__inner">
@@ -58,6 +59,7 @@ export default function HeroBanner() {
                 Podés enviar a tus amigos o a la comunidad tus hallazgos desde tu email.
                 </p>
               </div>
+              <a className="card-button" onClick={() => navigate('/comics/details')}>Ver detalle</a>
 
             </article>
           </div>

@@ -100,7 +100,8 @@ export default function Header({onToggleSideBar, quantity, isLanding}: HeaderPro
 
             </div>
         </header>
-        
+              <div className="header-bg" />
+
     </>  
   )
 }

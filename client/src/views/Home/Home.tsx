@@ -6,7 +6,7 @@ import { getLocalStorage, setLocalStorage } from '../../utils/cache.ts'
 import fetchComics from '../../api/MarvelAPI.ts'
 import type { ComicCardType } from '../../types/index.ts'
 import { CHARACTER_IDS, getTwoMonthRange } from '../../utils/index.ts'
-
+import type {ComicFilters} from '../../api/MarvelAPI.ts'
 export default function Home() {
 
   const [newReleases, setNewReleases] = useState<ComicCardType[]>(() => {
@@ -29,7 +29,11 @@ export default function Home() {
   useEffect(() => {
     const cachedNew = getLocalStorage('newReleases')
     if(!cachedNew || cachedNew.length === 0) {
-      fetchComics(undefined, undefined, 8, getTwoMonthRange()).then((data) => {
+    const Filters : ComicFilters = {
+    dateRange: getTwoMonthRange(),
+    limit: 8
+    }
+      fetchComics(Filters).then((data) => {
         if(data){
           setNewReleases(data)
           const days = 15 * 24 * 60
@@ -41,6 +45,7 @@ export default function Home() {
     const cachedCharacter = getLocalStorage("characterCache")
     if(!cachedCharacter || cachedCharacter.data.length === 0) {
       const randomChar = CHARACTER_IDS[Math.floor(Math.random() * CHARACTER_IDS.length)]
+      
       fetchComics(randomChar.id, undefined, 8).then((data) => {
         if(data){
           setRandomCharacterComics(data);
