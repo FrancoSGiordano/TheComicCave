@@ -38,3 +38,24 @@ export function getTwoMonthRange(): string {
 
   return `${start},${end}`;
 }
+
+export function getRandomDates(): string {
+  const year = 1990 + Math.floor(Math.random() * 10); // 1990-1999
+  const dateRange = `${year}-01-01,${year}-12-31`;
+  return dateRange
+}
+
+export function getRandomPastMonthDateRange(): string {
+  const today = new Date();
+  const year = today.getFullYear();
+  const currentMonth = today.getMonth(); // 0 = enero, 11 = diciembre
+
+  // Elegir un mes aleatorio anterior al actual
+  const month = currentMonth === 0 ? 0 : Math.floor(Math.random() * currentMonth);
+
+  // Primer y último día del mes elegido
+  const startDate = `${year}-${String(month + 1).padStart(2, '0')}-01`;
+  const endDate = `${year}-${String(month + 1).padStart(2, '0')}-${new Date(year, month + 1, 0).getDate()}`;
+
+  return `${startDate},${endDate}`;
+}
