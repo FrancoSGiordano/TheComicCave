@@ -10,7 +10,7 @@
 /* HERO (full-bleed visual aunque esté dentro de .content) */
 .hero {
   position: relative;
-  width: 100vw;
+  width: 100%;
   left: 50%;
   transform: translateX(-50%);
   min-height: 480px;

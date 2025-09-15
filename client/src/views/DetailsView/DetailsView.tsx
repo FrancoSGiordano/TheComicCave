@@ -1,6 +1,6 @@
 import './DetailsView.css'
 import Details from '../../components/Details/Details'
-
+import ShareCard from '../../components/ShareCard/ShareCard'
 
 export default function DetailsView(){
 
@@ -8,9 +8,8 @@ export default function DetailsView(){
         <>   
         <div className='viewcontent'>
             <Details
-                comic='comic'
             />
-            
+            <ShareCard></ShareCard>
         </div> 
 
         </>

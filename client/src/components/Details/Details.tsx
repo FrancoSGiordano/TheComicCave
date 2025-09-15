@@ -5,6 +5,7 @@ import { useState ,useEffect} from 'react';
 import type { ComicCardType, ComicDetails } from '../../types';
 import { fetchComicById } from '../../api/MarvelAPI'
 import { useFavoritesStore } from '../../store/favoriteStore'
+import ShareCard from '../ShareCard/ShareCard';
 
 
 

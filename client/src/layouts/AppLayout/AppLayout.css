@@ -40,6 +40,4 @@
 
 /* Contenedor interno con max-width centrado */
 .main-content .container {
-  max-width: var(--max-width);
-  margin: 0 auto;
 }
