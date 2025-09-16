@@ -1,5 +1,4 @@
 import './Details.css'
-import AbsoluteBatman from '../../../public/AbsoluteBatman.jpg'
 import { useNavigate, useParams } from 'react-router-dom';
 import { useState ,useEffect} from 'react';
 import type { ComicCardType, ComicDetails } from '../../types';
@@ -8,9 +7,13 @@ import { useFavoritesStore } from '../../store/favoriteStore'
 import ShareCard from '../ShareCard/ShareCard';
 
 
+interface DetailsProps{
+    onToggleShareCard: () => void
+    isOpen: boolean
+}
 
 
-export default function Details() {
+export default function Details({onToggleShareCard, isOpen}: DetailsProps) {
     
     const navigate = useNavigate()
     const {id} = useParams<{id: string}>()
@@ -19,6 +22,7 @@ export default function Details() {
     const [error, setError] = useState<string | null>(null)
     const [isFavorite, setIsFavorite] = useState<boolean>(false)
     const { addFavorite, removeFavorite, favorites } = useFavoritesStore()
+    
 
 
 
@@ -125,7 +129,10 @@ export default function Details() {
                     <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z" />
                 </svg>
                 </button>
-                    <button className='share buttonheader'>
+                    <button 
+                        className='share buttonheader'
+                        onClick={onToggleShareCard}
+                        >
                 
                     <svg xmlns="http://www.w3.org/2000/svg" 
                     fill="none" 
@@ -170,6 +177,10 @@ export default function Details() {
                     </div>
                 </div>
            </div>
+
+           {isOpen && comic && (
+  <ShareCard isOpen={isOpen} comicSharing={comic} onClose={onToggleShareCard} />
+)}
         </section>
     </>
    

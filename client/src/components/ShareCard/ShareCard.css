@@ -1,11 +1,6 @@
-/* ShareCard.css ----------------------------------------------------------- */
-
 :root{
   --panel-bg: rgba(12,18,22,0.95);
   --panel-border: rgba(255,255,255,0.06);
-  --muted: #9aa3ab;
-  --accent-green: #23c24b;
-  --accent-red: #ff4d4d;
   --accent-gray: #6b7280;
   --radius: 12px;
   --padding: 18px;
@@ -13,26 +8,29 @@
 
 
 
-/* Panel (fixed to right on desktop) */
 .share-card {
   position: fixed;
-  top: 11rem;                 
+  top: 8.5rem;                 
   right: 2rem;
   width: 320px;
-  max-width: calc(100% - 3rem);
   background: #1A1F2E;
   border: 1px solid var(--panel-border);
   border-radius: var(--radius);
   padding: var(--padding);
-  box-shadow: 0 14px 30px rgba(2,8,12,0.6);
-  z-index: 30;               
+  z-index: 70;               
   color: #fff;
+  transform: translateX(120%);
+
   display: flex;
   flex-direction: column;
   gap: 12px;
   transition: transform .22s ease;
 }
 
+.share-card.open{
+    transform: translateX(0);
+
+} 
 /* Title */
 .share-card .shareTitle {
   display: flex;
@@ -42,67 +40,61 @@
 }
 .share-card .shareTitle h2 {
   margin: 0;
-  font-size: 1.15rem;
+  font-size: 2rem;
   letter-spacing: 2px;
   font-weight: 700;
 }
 
 /* Comic preview */
-.share-card .shareComic {
+.shareComic {
   display: flex;
   gap: 12px;
-  align-items: center;
+  align-items: start;
   border-radius: 8px;
   padding: 8px;
 
 }
 .share-card .comicImage {
-  width: 64px;
-  height: 96px;
-  flex: 0 0 64px;
+  aspect-ratio: 2/3;
+  flex: 0 0 120px;
   border-radius: 6px;
   overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(255,255,255,0.03);
 }
 .share-card .comicImage img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  display: block;
 }
 .share-card .shareComic h3 {
-  margin: 0;
   font-size: 0.9rem;
   line-height: 1.1;
-  color: #e6eef2;
+  color: white;
   font-weight: 700;
   text-transform: uppercase;
 }
 
-/* Form fields */
+/*formulario*/
 .share-card form {
   display: flex;
   flex-direction: column;
   gap: 12px;
 }
-.share-card .field,
-.share-card fieldset.field {
+
+.field {
   display: flex;
   flex-direction: column;
   gap: 6px;
 }
-.share-card .input-title label {
-  font-size: 0.8rem;
-  color: var(--muted);
+
+
+label {
+  font-size: 0.9rem;
+  color: #9aa3ab;
   font-weight: 600;
 }
 
-/* Inputs & textarea */
-.share-card input[type="email"],
-.share-card textarea {
+/* Inputs y textarea */
+input[type="email"],textarea {
   width: 100%;
   background: rgba(255,255,255,0.03);
   border: 1px solid rgba(255,255,255,0.04);
@@ -110,21 +102,28 @@
   padding: 10px 12px;
   border-radius: 8px;
   font-size: 0.9rem;
+
+}
+
+input[type="email"]:focus,textarea:focus {
   outline: none;
-  box-sizing: border-box;
+
+
 }
-.share-card input::placeholder,
-.share-card textarea::placeholder {
-  color: rgba(230,238,242,0.45);
+
+
+input[type="email"]:focus-visible, textarea:focus-visible {
+  box-shadow: 0 0 0 1.5px #00D0FF46;
+  border-color: transparent;
 }
-.share-card textarea {
+
+textarea {
   resize: vertical;
   min-height: 80px;
   max-height: 180px;
-  line-height: 1.3;
 }
 
-/* Buttons row */
+/*botones*/
 .share-card .buttons {
   display: flex;
   gap: 10px;
@@ -141,28 +140,73 @@
   border-radius: 999px;
   font-weight: 700;
   font-size: 0.9rem;
-  min-width: 86px;
-  box-shadow: 0 6px 12px rgba(0,0,0,0.35);
+  min-width: 80px;
 }
 
-/* Primary send */
+/*enviar */
 .share-card button[type="submit"] {
-  background: var(--accent-green);
+  background: #2e9643;
+  color: #fff;
+}
+
+/*cancel*/
+
+.buttons .cancel {
+  background: #ff4d4daf;
   color: #07110a;
-  box-shadow: 0 6px 12px rgba(35,194,75,0.18);
 }
 
-/* Cancel (red) */
-.share-card button[type="button"]:first-of-type,
-.share-card .buttons .btn-cancel {
-  background: var(--accent-red);
-  color: #fff;
+/*reset*/
+.buttons .reset {
+  background: #6b7280;
+  color: #07110a;
 }
 
-/* Reset / neutral */
-.share-card .buttons button[type="button"]:last-child {
-  background: var(--accent-gray);
-  color: #fff;
+.buttons button:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px rgba(0,0,0,.45);
+}
+
+.buttons button:active{
+  transform: translateY(1px);
+  box-shadow: 0 5px 15px rgba(0,0,0,.45);
+}
+
+@media (max-width: 1200px) {
+  .share-card {
+    left: 50%;
+    right: auto;
+    transform: translateX(100%);
+    width: calc(100% - 2rem);
+    max-width: 760px;
+    max-height: 84vh;
+    overflow: auto;
+    padding: 16px;
+
+  }
+
+  .shareComic{
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+  }
+
+  .share-card .comicImage {
+    aspect-ratio: 2/3;
+    flex: 0 0 160px;
+  }
+
+  .share-card .buttons {
+
+    justify-content: center;
+    gap: 20px;
+
+}
+.share-card.open{
+    transform: translateX(-50%);
+
+} 
 }
 
 /* Make buttons responsive (stack on narrow widths) */
@@ -173,29 +217,11 @@
   }
   .share-card .buttons button {
     width: 100%;
-    min-width: 0;
+  }
+  .shareComic{
+    justify-content: center;
+
   }
 }
 
-/* MOBILE: center and expand modal-like */
-@media (max-width: 768px) {
-  .share-card {
-    left: 50%;
-    right: auto;
-    top: 15%;
-    transform: translateX(-50%);
-    width: calc(100% - 2rem);
-    max-width: 760px;
-    max-height: 84vh;
-    overflow: auto;
-    padding: 16px;
-  }
-}
 
-/* Small accessibility + focus states */
-.share-card input:focus,
-.share-card textarea:focus,
-.share-card button:focus {
-  outline: 3px solid rgba(255,255,255,0.06);
-  outline-offset: 2px;
-}

@@ -1,12 +1,15 @@
 import './ShareCard.css'
 import { useEffect, useState } from "react"
 import absoluteBatman from "../../../public/AbsoluteBatman.jpg"
+import type { ComicDetails } from '../../types';
 
 interface ShareCardProps{
     onClose?: () => void;
+    isOpen: boolean
+    comicSharing: ComicDetails
 }
 
-export default function ShareCard( {onClose}: ShareCardProps) {
+export default function ShareCard( {onClose, isOpen, comicSharing}: ShareCardProps) {
     const [emisor, setEmisor] = useState("");
     const [touchedEmisor, setTouchedEmisor] = useState(false);
     const [emisorError, setEmisorError] = useState("");
@@ -26,26 +29,23 @@ export default function ShareCard( {onClose}: ShareCardProps) {
     };
 
   const handleCancel = () => {
-    const ok = window.confirm("¿Deseas volver a la página anterior?");
-    if (ok) {
+ 
       if (onClose) onClose();
-      else window.history.back();
-    }
+
   };
 
   return (
     <>
-        <section className='share-card'>
+        <section className={`share-card ${isOpen ? 'open' : ''}`}>
             <div className='shareTitle'>
                 <h2>Compartir</h2>
             </div>
 
             <div className='shareComic'>
                 <div className='comicImage'>
-                    <img src={absoluteBatman} alt="" />
+                    <img src={comicSharing.imageUrl} alt="" />
                 </div>
-                <h3>Fantastic Four: Into the Depths Infinity Comic (2025) #6
-</h3>
+                <h3>{comicSharing.title}</h3>
             </div>
             <form action="">
                 <div className='field'>
@@ -79,8 +79,8 @@ export default function ShareCard( {onClose}: ShareCardProps) {
                 </div>
                 <div className='buttons'>
                     <button type='submit' >Enviar</button>
-                    <button type='button' onClick={handleCancel}>Cancelar</button>
-                    <button type='button' onClick={handleReset}>Restablecer valores</button>    
+                    <button type='button' className='cancel' onClick={handleCancel}>Cancelar</button>
+                    <button type='button' className='reset' onClick={handleReset}>Restablecer</button>    
     
                 </div>
 

@@ -23,7 +23,6 @@ export default function Header({onToggleSideBar, quantity, isLanding}: HeaderPro
                             <button 
                             className='menuButton'
                             onClick={onToggleSideBar}
-                            aria-label="Abrir Filtros"
                         >
                         <svg xmlns="http://www.w3.org/2000/svg" 
                             viewBox="0 0 24 24"

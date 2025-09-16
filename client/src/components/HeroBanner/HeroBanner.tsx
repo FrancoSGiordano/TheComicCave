@@ -59,7 +59,6 @@ export default function HeroBanner() {
                 Podés enviar a tus amigos o a la comunidad tus hallazgos desde tu email.
                 </p>
               </div>
-              <a className="card-button" onClick={() => navigate('/comics/details')}>Ver detalle</a>
 
             </article>
           </div>
