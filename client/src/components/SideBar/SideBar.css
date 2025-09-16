@@ -83,7 +83,8 @@
   top: 25%;
   width: 18px;
   height: 18px;
-  color: #A8A29E;           
+  color: #A8A29E;
+  cursor: pointer;           
 }
 
 /*busqueda*/
@@ -110,15 +111,6 @@
 .search-input:focus-visible {
   box-shadow: 0 0 0 1.5px #00D0FF46;
   border-color: transparent;
-}
-
-.search-icon-secondary {
-  position: absolute;
-  left: 0.75rem;        
-  top: 30%;
-  width: 14px;
-  height: 14px;
-  color: #A8A29E;           
 }
 
 .select-character{

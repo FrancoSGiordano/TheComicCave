@@ -1,35 +1,70 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './SideBar.css'
 import type { Character } from '../../types'
-
 import { getCharacters } from '../../api/MarvelAPI'
 import type { SingleValue } from 'react-select'
 import AsyncSelect from 'react-select/async'
 import { customStyles } from './SelectStyles'
+import { useSearchStore } from '../../store/searchStore'
+import { useNavigate } from 'react-router-dom'
 
 type SideBarProps = {
   isOpen: boolean
-  searchTerm: string
 }
 
-type Option = {
-  label: string;
-  value: number;
+export type Option = {
+  label?: string;
+  value?: number;
 }
 
 
-export default function SideBar({isOpen, searchTerm} : SideBarProps) {
+export default function SideBar({isOpen} : SideBarProps) {
 
-    const [selectedCharacter, setSelectedCharacter] = useState<Option | null>(null)
-    const [inputText, setInputText] = useState("")
-    const [enableCharacterFilter, setEnableCharacterFilter] = useState(false)
+    const { setFilters, filters, searchComic, setCharacterOption, characterOption } = useSearchStore() 
+    const [selectedCharacter, setSelectedCharacter] = useState<Option | null>(characterOption)
+    const [enableCharacterFilter, setEnableCharacterFilter] = useState(characterOption ? true : false)
+    const [searchTerm, setSearchTerm] = useState(filters.title)
+    const navigate = useNavigate()
 
-    const handleInputChange = (value : string) => {
-      setInputText(value)
+    console.log(characterOption)
+
+    const handleSearch = () => {
+
+      console.log(filters)
+
+      const hasFilters = Object.values(filters).some(
+        (value) => value !== "" && value !== null && value !== undefined
+      )
+
+      if(!hasFilters) {
+        return;
+      }
+
+
+      searchComic()
+      navigate('comics/search')
+    }
+
+    const handleInputSearch = (e : React.ChangeEvent<HTMLInputElement>) => {
+      const value = e.target.value
+      setSearchTerm(value)
+      setFilters({
+        title: value
+      })
     }
 
     const handleChange = (value : SingleValue<Option>) => {
       setSelectedCharacter(value)
+      setFilters({
+        characterId: value?.value
+      })
+      setCharacterOption(
+        value ? {
+          value: value.value,
+          label: value.label
+        } : undefined
+      );
+
     }
 
     const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -47,6 +82,10 @@ export default function SideBar({isOpen, searchTerm} : SideBarProps) {
 
       return options
     };
+
+    useEffect(() => {
+      setEnableCharacterFilter(!!characterOption)
+    }, [characterOption])
   
 
     return (
@@ -70,6 +109,7 @@ export default function SideBar({isOpen, searchTerm} : SideBarProps) {
                 className="search-icon"
                 aria-hidden="true"
                 focusable="false"
+                onClick={() => handleSearch()}
               >
                 <path
                   strokeLinecap="round"
@@ -82,6 +122,7 @@ export default function SideBar({isOpen, searchTerm} : SideBarProps) {
                 type="text"
                 placeholder="Buscar título"
                 value={searchTerm}
+                onChange={(e) => handleInputSearch(e)}
                 className="search-input"
                 aria-label="Buscar título, autor o editorial"
               />
@@ -107,9 +148,8 @@ export default function SideBar({isOpen, searchTerm} : SideBarProps) {
                     classNamePrefix="custom"
                     cacheOptions
                     defaultOptions
-                    value={selectedCharacter}
+                    value={enableCharacterFilter ? selectedCharacter || null : null}
                     loadOptions={loadOptions}
-                    onInputChange={handleInputChange}
                     onChange={handleChange}
                     isClearable
                     placeholder="Filtrar por personaje..."

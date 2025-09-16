@@ -5,14 +5,15 @@ import SideBar from '../../components/SideBar/SideBar'
 import Footer from '../../components/Footer/Footer'
 import "./AppLayout.css"
 import { Outlet, useLocation } from 'react-router-dom'
+import { useSearchStore } from '../../store/searchStore'
 
 
 export default function AppLayout() {
     
     const location = useLocation()
     const {quantity} = useFavoritesStore()
+    const { clearFilters } = useSearchStore()
     const [sideBarOpen, setSideBarOpen] = useState(true)
-    const [searchTerm, setSearchTerm] = useState("")
     const [isLanding, setIsLanding] = useState(location.pathname !== "/")
 
 
@@ -23,6 +24,12 @@ export default function AppLayout() {
 
     useEffect(() => {
       setIsLanding(location.pathname !== "/")
+    }, [location.pathname])
+
+    useEffect(() => {
+      if(location.pathname !== "/comics/search"){
+        clearFilters()
+      }
     }, [location.pathname])
 
     return (
@@ -38,9 +45,7 @@ export default function AppLayout() {
                   
                   {location.pathname !== "/" && (
                       <SideBar
-                        isOpen={sideBarOpen}
-                        searchTerm={searchTerm}
-                        
+                        isOpen={sideBarOpen}    
                       />
                   )}
 

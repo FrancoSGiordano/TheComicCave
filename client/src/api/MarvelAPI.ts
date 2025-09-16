@@ -8,7 +8,8 @@ export type ComicFilters = {
     orderBy?: string;   
     limit?: number;
     offset?: number;
-    characterId?: number
+    characterId?: number;
+    creatorId?: number;
 }
 
 
