@@ -179,8 +179,8 @@ export default function Details({onToggleShareCard, isOpen}: DetailsProps) {
            </div>
 
            {isOpen && comic && (
-  <ShareCard isOpen={isOpen} comicSharing={comic} onClose={onToggleShareCard} />
-)}
+            <ShareCard isOpen={isOpen} comicSharing={comic} onClose={onToggleShareCard} />
+            )}
         </section>
     </>
    

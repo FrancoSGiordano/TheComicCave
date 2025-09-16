@@ -93,6 +93,14 @@ label {
   font-weight: 600;
 }
 
+.input-title{
+  display: flex;
+}
+.error{
+    color: rgb(248, 64, 64);
+    margin-left: 6px;
+
+  }
 /* Inputs y textarea */
 input[type="email"],textarea {
   width: 100%;
