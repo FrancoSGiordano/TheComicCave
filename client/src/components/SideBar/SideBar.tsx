@@ -28,6 +28,10 @@ export default function SideBar({isOpen} : SideBarProps) {
 
     console.log(characterOption)
 
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      handleSearch();
+    };
     const handleSearch = () => {
 
       console.log(filters)
@@ -96,26 +100,22 @@ export default function SideBar({isOpen} : SideBarProps) {
           className={`category-aside ${isOpen ? 'open' : ''}`}
           role="complementary"
         >
-          {/* Search */}
-          <div className="search-block">
+          <form className="search-block" onSubmit={handleSubmit} role="search" aria-label="Buscar cómics">
             <div className="search-relative">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth="1.5"
-                stroke="currentColor"
-                className="search-icon"
-                aria-hidden="true"
-                focusable="false"
-                onClick={() => handleSearch()}
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
-                />
-              </svg>
+              <button type="submit" className="icon-button" aria-label="Buscar">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                  className="search-icon"
+                  focusable="false"
+                  aria-hidden="true"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                </svg>
+              </button>
 
               <input
                 type="text"
@@ -126,15 +126,17 @@ export default function SideBar({isOpen} : SideBarProps) {
                 aria-label="Buscar título, autor o editorial"
               />
             </div>
-          </div>
+          </form>
+
 
           {/* Filters */}
           <div className="categories">
             <h3>Filtros</h3>
             <div>
               <div className='filters-block'>
-                <div className='checkbox'>
-                  <input 
+                <div className='checkbox-wrapper-2'>
+                  <input
+                  className='sc-gJwTLC ikxBAC' 
                     type="checkbox" 
                     checked={enableCharacterFilter}
                     onChange={(e) => handleCheckboxChange(e)}

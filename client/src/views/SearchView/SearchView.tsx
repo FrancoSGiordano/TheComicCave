@@ -1,6 +1,7 @@
 import ComicSection from "../../components/ComicSection/ComicSection"
 import { useSearchStore } from "../../store/searchStore"
 import './SearchView.css'
+import Publicid from '../../components/Publicid/Publicid.tsx'
 
 
 export default function SearchView() {
@@ -14,6 +15,8 @@ export default function SearchView() {
                     title="Resultados de busqueda..."
                     comics={results}
                 />
+
+                <Publicid/>
             </div>
         
         </>
