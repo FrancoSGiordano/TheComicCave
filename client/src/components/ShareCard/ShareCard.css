@@ -1,36 +1,27 @@
-:root{
-  --panel-bg: rgba(12,18,22,0.95);
-  --panel-border: rgba(255,255,255,0.06);
-  --accent-gray: #6b7280;
-  --radius: 12px;
-  --padding: 18px;
-}
-
-
-
 .share-card {
   position: fixed;
   top: 8.5rem;                 
   right: 2rem;
   width: 320px;
   background: #1A1F2E;
-  border: 1px solid var(--panel-border);
-  border-radius: var(--radius);
-  padding: var(--padding);
-  z-index: 70;               
-  color: #fff;
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 12px;
+  padding: 18px;
+  z-index: 8;               
   transform: translateX(120%);
+  transition: transform 300ms ease;
   display: flex;
   flex-direction: column;
   gap: 12px;
-  transition: transform 300ms ease;
+
+
 }
 
 .share-card.open{
     transform: translateX(0);
 
 } 
-/* Title */
+/*Title*/
 .share-card .shareTitle {
   display: flex;
   align-items: center;
@@ -41,14 +32,13 @@
   margin: 0;
   font-size: 2rem;
   letter-spacing: 2px;
-  font-weight: 700;
+  font-weight: 400;
 }
 
-/* Comic preview */
+/*contenedor de imagen y titulo*/
 .shareComic {
   display: flex;
   gap: 12px;
-  align-items: start;
   border-radius: 8px;
   padding: 8px;
 
@@ -95,27 +85,26 @@ label {
 .input-title{
   display: flex;
 }
-.error{
-    color: rgb(248, 64, 64);
-    margin-left: 6px;
 
-  }
-/* Inputs y textarea */
+.error{
+  color: rgb(248, 64, 64);
+  margin-left: 6px;
+
+}
+
+/*Inputs y textarea*/
 input[type="email"],textarea {
   width: 100%;
-  background: rgba(255,255,255,0.03);
+  background: #212635;
   border: 1px solid rgba(255,255,255,0.04);
-  color: #e6eef2;
   padding: 10px 12px;
   border-radius: 8px;
   font-size: 0.9rem;
 
 }
 
-input[type="email"]:focus,textarea:focus {
+input[type="email"]:focus, textarea:focus {
   outline: none;
-
-
 }
 
 
@@ -179,17 +168,12 @@ textarea {
   box-shadow: 0 5px 15px rgba(0,0,0,.45);
 }
 
+/*para tablet*/
 @media (max-width: 1200px) {
   .share-card {
     left: 50%;
-    right: auto;
-    transform: translateX(100%);
     width: calc(100% - 2rem);
     max-width: 760px;
-    max-height: 84vh;
-    overflow: auto;
-    padding: 16px;
-
   }
 
   .shareComic{
@@ -201,11 +185,10 @@ textarea {
 
   .share-card .comicImage {
     aspect-ratio: 2/3;
-    flex: 0 0 160px;
+    flex: 160px;
   }
 
   .share-card .buttons {
-
     justify-content: center;
     gap: 20px;
 
@@ -216,19 +199,14 @@ textarea {
 } 
 }
 
-/* Make buttons responsive (stack on narrow widths) */
-@media (max-width: 420px) {
+@media (max-width: 480px) {
   .share-card .buttons {
     flex-direction: column;
-    align-items: stretch;
   }
   .share-card .buttons button {
     width: 100%;
   }
-  .shareComic{
-    justify-content: center;
 
-  }
 }
 
 

@@ -1,0 +1,107 @@
+:root{
+  --panel-bg: rgba(12,18,22,0.95);
+  --panel-border: rgba(255,255,255,0.06);
+  --accent-gray: #6b7280;
+  --radius: 12px;
+  --padding: 18px;
+  --panini-rojo: #ED1C24;
+}
+
+
+
+.publi-card {
+  position: fixed;
+  top: 11rem;                 
+  right: 2rem;
+  width: 320px;
+  background: #F7EB1C;
+  border: 1px solid var(--panel-border);
+  border-radius: var(--radius);
+  padding: var(--padding);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+
+}
+
+.publi-logo{
+  width: 70%;
+  margin: 0 auto;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding-top:4px;
+}
+.publi-img{
+  max-width:100%;
+  height:auto;
+  object-fit:contain;
+  border-radius:6px;
+}
+
+
+/* Title */
+.publi-Title, .publi-subtitle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--panini-rojo);
+}
+
+.publi-Title{
+  padding: 2rem 0 1rem 0;
+  -webkit-text-stroke: 0.8px;
+  -webkit-text-stroke-color: black;
+
+}
+.publi-Title h1{
+  font-family:'Franklin Gothic Medium';
+  font-size: 2rem;
+  letter-spacing: 2px;
+}
+
+.publi-subtitle{
+  -webkit-text-stroke: 0.5px;
+  -webkit-text-stroke-color: black;
+  padding-bottom: 2rem;
+}
+
+.publi-subtitle h3{
+  font-family:'Franklin Gothic Medium';
+  font-size: 1.3rem;
+    letter-spacing: 1px;
+
+}
+.publi-button{
+  width:100%;
+  display:flex;
+  justify-content:center;
+  padding-bottom:6px;
+
+}
+
+.publi-button .button{
+  background: var(--panini-rojo);
+  color: #fff;
+  text-decoration:none;
+  padding:10px 28px;
+  border-radius:10px;
+  font-weight:800;
+  font-family:'Franklin Gothic Medium';
+  font-size:1.5rem;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.25);
+}
+
+.publi-button .button:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 12px 22px rgba(0,0,0,0.32);
+}
+
+@media (max-width: 1800px){
+  .publi-card{
+    display: none;
+  }
+}

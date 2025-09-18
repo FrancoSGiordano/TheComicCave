@@ -5,7 +5,7 @@ footer {
   background-color: #0b0f12;
   font-size: 0.9rem;
   border-top: 1px solid rgba(255,255,255,0.02);
-  z-index: 60;
+  z-index: 7;
   padding-bottom: 1rem;
 }
 
