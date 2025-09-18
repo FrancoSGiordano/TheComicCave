@@ -1,45 +1,39 @@
 import './LandingPage.css'
 import HeroBanner from '../../components/HeroBanner/HeroBanner'
 import ComicSection from '../../components/ComicSection/ComicSection'
-import { useEffect, useState } from 'react';
-import { getLocalStorage, setLocalStorage } from '../../utils/cache';
+import { useEffect } from 'react';
 import { getTwoMonthRange } from '../../utils';
-import fetchComics, { type ComicFilters } from '../../api/MarvelAPI';
-import type { ComicCardType } from '../../types';
+import { type ComicFilters } from '../../api/MarvelAPI';
+import { useComicsStore } from '../../store/comicStore';
 
 export default function LandingPage(){
 
-    const [newReleases, setNewReleases] = useState<ComicCardType[]>(() => {
-        const cached = getLocalStorage("newReleases");
-        return cached ? cached : []
-      })
     
+    
+    const { sections, loadSection } = useComicsStore() 
+    const newReleases = sections["newReleases"] ?? []
     useEffect(() => {
-        const cachedNew = getLocalStorage('newReleases')
-        if(!cachedNew || cachedNew.length === 0) {
-          const filters : ComicFilters = {
-            dateRange: getTwoMonthRange(),
-            limit: 8
-          }
-          fetchComics(filters).then((data) => {
-            if(data){
-              setNewReleases(data)
-              const days = 15 * 24 * 60
-              setLocalStorage("newReleases", data, days)
-            }
-          })
+      if(newReleases.length === 0) {
+        const filters : ComicFilters = {
+          dateRange: getTwoMonthRange(),
+          limit: 32
         }
-    })
+        loadSection("newReleases", 180, filters)
+      }
+    }, [newReleases.length])
 
     return (
         <>    
             <div className='landing-container'>
                 <HeroBanner/>
             </div>
+            <div className='comicBody'>
                 <ComicSection
                     title='Novedades'
                     comics={newReleases}
-                />           
+                />  
+            </div>
+         
         </>
     )
 }

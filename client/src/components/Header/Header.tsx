@@ -23,7 +23,6 @@ export default function Header({onToggleSideBar, quantity, isLanding}: HeaderPro
                             <button 
                             className='menuButton'
                             onClick={onToggleSideBar}
-                            aria-label="Abrir Filtros"
                         >
                         <svg xmlns="http://www.w3.org/2000/svg" 
                             viewBox="0 0 24 24"
@@ -68,7 +67,8 @@ export default function Header({onToggleSideBar, quantity, isLanding}: HeaderPro
                     />
                 </div>
 
-                <div className="favoriteSection">
+                
+                <div className="buttons-section">
                     <button className='favorite' onClick={() => navigate('/comics/favorites')}>
                     <svg
                         className="icon"
@@ -90,17 +90,43 @@ export default function Header({onToggleSideBar, quantity, isLanding}: HeaderPro
                         <span className='favoriteNumber' aria-hidden="true">
                             {quantity}
                         </span>
-                     )}
+                    )}
                     </button>
 
+                    <button className='history' onClick={() => navigate("/comics/history")}>
+                    <svg
+                        className="icon"
+                        viewBox="0 0 24 24"
+                        width={24}
+                        height={24}
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth={1.5}
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        xmlns="http://www.w3.org/2000/svg"
+                        aria-hidden="true"
+                        focusable="false"
+                        >
+                        <path d="M12 1a11 11 0 1 0 11 11A11 11 0 0 0 12 1zm0 20a9 9 0 1 1 9-9 9 9 0 0 1-9 9zm.5-9.5V7h-1v5h5v-1z" />
+                    </svg>                        
+                    </button>
+
+
                 </div>
+
+                    
+               
+
+                
 
 
 
 
             </div>
         </header>
-        
+              <div className="header-bg" />
+
     </>  
   )
 }

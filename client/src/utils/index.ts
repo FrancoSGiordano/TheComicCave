@@ -1,3 +1,7 @@
+
+import type { ComicCardType } from "../types";
+
+
 export const CHARACTER_IDS = [
   { id: 1009610, name: "Spider-Man" },
   { id: 1009368, name: "Iron Man" },
@@ -58,4 +62,22 @@ export function getRandomPastMonthDateRange(): string {
   const endDate = `${year}-${String(month + 1).padStart(2, '0')}-${new Date(year, month + 1, 0).getDate()}`;
 
   return `${startDate},${endDate}`;
+}
+
+export function rotateComics(comics: ComicCardType[], key: string) {
+  if (!comics || comics.length === 0) return [];
+
+  const visibleCount = 8;
+  
+  let lastIndex = parseInt(localStorage.getItem(key) || "0");
+
+  const rotated = comics.slice(lastIndex, lastIndex + visibleCount)
+
+  const newIndex = (lastIndex + visibleCount) % comics.length;
+
+  console.log(newIndex)
+  
+  localStorage.setItem(key, newIndex.toString());
+
+  return rotated;
 }

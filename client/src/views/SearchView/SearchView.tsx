@@ -1,5 +1,6 @@
 import ComicSection from "../../components/ComicSection/ComicSection"
 import { useSearchStore } from "../../store/searchStore"
+import './SearchView.css'
 
 
 export default function SearchView() {
@@ -8,10 +9,13 @@ export default function SearchView() {
 
     return (
         <>
-            <ComicSection
-                title="Resultados de busqueda..."
-                comics={results}
-            />
+            <div className="comicsBody">
+                <ComicSection
+                    title="Resultados de busqueda..."
+                    comics={results}
+                />
+            </div>
+        
         </>
     )
 }

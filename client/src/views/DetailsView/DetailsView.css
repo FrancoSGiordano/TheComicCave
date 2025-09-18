@@ -1,6 +1,8 @@
-.comicsBody{
+.viewcontent{
+
   padding: 28px 20px;
   padding-top: 68px; /*dejo el espacio arriba de lo que ocupa el header*/
   max-width: 1100px;
   margin: 0 auto;
+
 }

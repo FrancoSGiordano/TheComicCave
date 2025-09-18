@@ -1,0 +1,259 @@
+:root{
+  --bg-darker: #0b0d0f;
+  --overlay: rgba(5,6,8,0.66);
+  --items: rgba(255,255,255,0.65);
+  --card-w: 320px;
+  --max-width: 1100px;
+
+}
+
+.detail-master{
+  position: relative;
+  color: #fff;
+  padding: 2rem 1rem;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  border-radius: 10px;
+}
+
+.detail-overlay {
+  position: absolute;
+  inset: 0;                   
+  z-index: 1;                 
+  pointer-events: none;       
+  background: rgba(6,7,9,0.85) 100%;
+  backdrop-filter: blur(8px); 
+}
+
+
+.detail-header{
+  position: relative;
+  z-index: 2; /* sobre el overlay */
+  max-width: var(--max-width);
+  margin: 0 auto 1.25rem;
+  padding: 0 1rem;
+  display: flex;
+  justify-content: space-between;
+
+}
+
+.backSection {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/*boton de volver*/
+.back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: transparent;
+  border: none;
+  color:  white;
+  cursor: pointer;
+  transition: transform .12s ease;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+
+
+
+
+.shareSection{
+display: flex;
+gap: 5px;
+}
+
+/*compartir*/
+.share{
+  position: relative;
+  border: 0;
+  background: transparent;
+  padding: 10px;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  transition: transform .14s ease;
+}
+
+/*botón favorito */
+.favoritebutton {
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+  border: none;
+  background: black;
+  color: white;
+  cursor: pointer;
+}
+
+/*marcar favorito*/
+.favoritebutton.is-fav {
+  background: var(--corazon);
+}
+
+/*icono*/
+.favorite-button .icono
+{
+  display: block;
+  width: 18px;
+  height: 18px;
+  stroke: currentColor;
+  fill: none;
+}
+
+.buttonheader .icon{
+  width: 22px;
+  height: 22px;
+  display:block;
+}
+
+.buttonheader:hover { 
+  background: rgba(255,255,255,0.03);
+  transform: translateY(-2px);
+}
+.buttonheader:active { transform: translateY(0); }
+
+/*contenedor de detalles*/
+.detail-content{
+  position: relative;
+  z-index: 2; /* sobre el overlay */
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 2rem;
+  align-items: start;
+  padding: 0 1rem 2.5rem;
+}
+
+/* bloque de la portada/imágen */
+.detail-image{
+  display:flex;
+}
+
+.detail-image img{
+  max-width: 320px;
+  border-radius: 10px;
+}
+
+/*texto*/
+.detail-text{
+  color: white;
+  line-height: 1.45;
+}
+
+/* título principal */
+.title-container h2{
+  margin-bottom:  0.75rem ;
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* estilos para los campos (label + valor) tipo metadata */
+.date-container,
+.publisher-container{
+  display: flex;
+  gap: 1.25rem;
+  align-items: baseline;
+  margin-bottom: 0.9rem;
+}
+
+/* la clase .title (en tu HTML la usas en h3) */
+.title{
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--items);
+  min-width: 100px;
+}
+
+/* valor asociado a la etiqueta */
+.date-container p,
+.publisher-container p{
+  margin: 0;
+  color: #ffffff;
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+/* descripción larga */
+.description-container{
+    margin-top: 1rem;
+    font-size: 0.98rem;
+    line-height: 1.6;
+    color: white;
+    margin-bottom: 0.9rem;
+}
+
+.creators-container ul{
+  list-style: none;
+
+}
+
+
+/* RESPONSIVE: en pantallas pequeñas apilar verticalmente */
+@media (max-width: 880px){
+  .detail-content{
+    grid-template-columns: 1fr;
+    gap: 1.1rem;
+    padding-bottom: 1.6rem;
+  }
+
+  /* centrar la portada y hacerla más chica */
+  .detail-image{
+    justify-content: center;
+    margin-bottom: 0;
+  }
+
+  .detail-image img{
+    max-width: 260px;
+  }
+
+  .title-container h2{
+    font-size: 1.4rem;
+    text-align: center;
+  }
+
+
+  .date-container,
+  .publisher-container{
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.15rem;
+  }
+
+  .title{
+    min-width: 0;
+  }
+
+  .detail-text{
+    text-align: left;
+  }
+}
+
+/* Pantallas muy anchas, añade más separación horizontal para respirar */
+@media (min-width: 1400px){
+  .detail-content{
+    gap: 3rem;
+  }
+
+  .title-container h2{
+    font-size: 2.4rem;
+  }
+}

@@ -4,6 +4,8 @@ import FavoritesView from "./views/FavoritesView/FavoritesView";
 import AppLayout from "./layouts/AppLayout/AppLayout";
 import LandingPage from "./views/LandingPage/LandingPage";
 import SearchView from "./views/SearchView/SearchView";
+import DetailsView from "./views/DetailsView/DetailsView";
+import HistoryView from "./views/HistoryView/HistoryView";
 
 
 export default function Router() {
@@ -15,6 +17,9 @@ export default function Router() {
                     <Route path="/comics" element={<Home/>} ></Route>
                     <Route path="/comics/favorites" element={<FavoritesView/>}></Route>
                     <Route path="/comics/search" element={<SearchView/>}></Route>
+                    <Route path="/comics/favorites" element={<FavoritesView/>}></Route>
+                    <Route path="/comics/details/:id" element={<DetailsView/>}></Route>
+                    <Route path="/comics/history" element={<HistoryView/>}></Route>
                 </Route>
             </Routes>
         </BrowserRouter>

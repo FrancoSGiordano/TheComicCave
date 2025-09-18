@@ -2,56 +2,47 @@ import { useEffect, useState } from 'react'
 import ComicSection from '../../components/ComicSection/ComicSection.tsx'
 import '../../index.css'
 import './Home.css'
-import type { ComicCardType } from '../../types/index.ts'
-import { CHARACTER_IDS, getRandomDates, getRandomPastMonthDateRange} from '../../utils/index.ts'
+import { useComicsStore } from '../../store/comicStore.ts'
 import type { ComicFilters } from '../../api/MarvelAPI.ts'
-import fetchComics from '../../api/MarvelAPI.ts'
+import { getRandomDates, getRandomPastMonthDateRange, getTwoMonthRange  } from '../../utils/index.ts'
 
 export default function Home() {
 
-  const [newReleases, setNewReleases] = useState<ComicCardType[]>([])
-  const [randomCharacterComcis, setRandomCharacterComics] = useState<ComicCardType[]>([])
-  const [classics, setClassics] = useState<ComicCardType[]>([])
-  const [character, setCharacter] = useState<string>("")
+  const { sections, loadSection } = useComicsStore()
+  const newReleases = sections["newReleasesSearch"] ?? []
+  const randomCharacterComcis = sections["characterSection"] ?? []
+  const classics = sections["classics90"] ?? []
+  const [character, setCharacter] = useState("")
 
   useEffect(() => {
-    const filtersNewRealeases : ComicFilters = {
-      dateRange: getRandomPastMonthDateRange(),
-      limit: 8,
-      
-    }
-    fetchComics(filtersNewRealeases).then((data) => {
-      if(data){
-        setNewReleases(data)
+    if(newReleases.length === 0) {
+      const filters : ComicFilters = {
+        dateRange: getRandomPastMonthDateRange(),
+        limit: 32
       }
-    })
-    
-    
-    const randomChar = CHARACTER_IDS[Math.floor(Math.random() * CHARACTER_IDS.length)]
-    const filtersCharacterComics : ComicFilters = {
-      characterId: randomChar.id,
-      limit: 8
+      loadSection("newReleasesSearch", 180, filters)
     }
-    fetchComics(filtersCharacterComics).then((data) => {
-      if(data){
-        setRandomCharacterComics(data);
-        setCharacter(randomChar.name)  
-      }
-    })
-     
+  }, [newReleases.length])
 
-   
-    const filtersClassics : ComicFilters = {
-      dateRange: getRandomDates(),
-      limit: 8
-    }
-    fetchComics(filtersClassics).then((data) => {
-      if(data){
-        setClassics(data);
+  useEffect(() => {
+    if(randomCharacterComcis.length === 0) {
+      const filters : ComicFilters = {
+        dateRange: getTwoMonthRange(),
+        limit: 32
       }
-    });
-    
-  }, [])
+      loadSection("characterSection", 5, filters)
+    }
+  }, [randomCharacterComcis.length])
+
+  useEffect(() => {
+   if(classics.length === 0) {
+      const filters : ComicFilters = {
+        dateRange: getRandomDates(),
+        limit: 32
+      }
+      loadSection("classics90", 180, filters)
+    }
+  }, [classics.length])
 
 
   return (

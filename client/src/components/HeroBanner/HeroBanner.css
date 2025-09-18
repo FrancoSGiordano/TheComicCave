@@ -10,15 +10,18 @@
 /* HERO (full-bleed visual aunque esté dentro de .content) */
 .hero {
   position: relative;
-  width: 100vw;
+  width: 100%;
   left: 50%;
   transform: translateX(-50%);
   min-height: 480px;
   overflow: hidden;
   z-index: 10;
-    display: flex;
+  display: flex;
+  
   
 }
+
+
 
 /* Imagen de fondo */
 .hero__img{
@@ -30,7 +33,7 @@
   object-position: 50% 0%; /* ajustá si necesitás otro foco */
   z-index: 0;
   display: block;
-
+  
 }
 
 

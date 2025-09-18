@@ -1,0 +1,234 @@
+:root{
+  --panel-bg: rgba(12,18,22,0.95);
+  --panel-border: rgba(255,255,255,0.06);
+  --accent-gray: #6b7280;
+  --radius: 12px;
+  --padding: 18px;
+}
+
+
+
+.share-card {
+  position: fixed;
+  top: 8.5rem;                 
+  right: 2rem;
+  width: 320px;
+  background: #1A1F2E;
+  border: 1px solid var(--panel-border);
+  border-radius: var(--radius);
+  padding: var(--padding);
+  z-index: 70;               
+  color: #fff;
+  transform: translateX(120%);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: transform 300ms ease;
+}
+
+.share-card.open{
+    transform: translateX(0);
+
+} 
+/* Title */
+.share-card .shareTitle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.share-card .shareTitle h2 {
+  margin: 0;
+  font-size: 2rem;
+  letter-spacing: 2px;
+  font-weight: 700;
+}
+
+/* Comic preview */
+.shareComic {
+  display: flex;
+  gap: 12px;
+  align-items: start;
+  border-radius: 8px;
+  padding: 8px;
+
+}
+.share-card .comicImage {
+  aspect-ratio: 2/3;
+  flex: 0 0 120px;
+  border-radius: 6px;
+  overflow: hidden;
+}
+.share-card .comicImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.share-card .shareComic h3 {
+  font-size: 0.9rem;
+  line-height: 1.1;
+  color: white;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+/*formulario*/
+.share-card form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+
+label {
+  font-size: 0.9rem;
+  color: #9aa3ab;
+  font-weight: 600;
+}
+
+.input-title{
+  display: flex;
+}
+.error{
+    color: rgb(248, 64, 64);
+    margin-left: 6px;
+
+  }
+/* Inputs y textarea */
+input[type="email"],textarea {
+  width: 100%;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.04);
+  color: #e6eef2;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+
+}
+
+input[type="email"]:focus,textarea:focus {
+  outline: none;
+
+
+}
+
+
+input[type="email"]:focus-visible, textarea:focus-visible {
+  box-shadow: 0 0 0 1.5px #00D0FF46;
+  border-color: transparent;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 80px;
+  max-height: 180px;
+}
+
+/*botones*/
+.share-card .buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 6px;
+}
+
+/* Button styles */
+.share-card button {
+  cursor: pointer;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  min-width: 80px;
+}
+
+/*enviar */
+.share-card button[type="submit"] {
+  background: #2e9643;
+  color: #fff;
+}
+
+/*cancel*/
+
+.buttons .cancel {
+  background: #ff4d4daf;
+  color: #07110a;
+}
+
+/*reset*/
+.buttons .reset {
+  background: #6b7280;
+  color: #07110a;
+}
+
+.buttons button:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px rgba(0,0,0,.45);
+}
+
+.buttons button:active{
+  transform: translateY(1px);
+  box-shadow: 0 5px 15px rgba(0,0,0,.45);
+}
+
+@media (max-width: 1200px) {
+  .share-card {
+    left: 50%;
+    right: auto;
+    transform: translateX(100%);
+    width: calc(100% - 2rem);
+    max-width: 760px;
+    max-height: 84vh;
+    overflow: auto;
+    padding: 16px;
+
+  }
+
+  .shareComic{
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+  }
+
+  .share-card .comicImage {
+    aspect-ratio: 2/3;
+    flex: 0 0 160px;
+  }
+
+  .share-card .buttons {
+
+    justify-content: center;
+    gap: 20px;
+
+}
+.share-card.open{
+    transform: translateX(-50%);
+
+} 
+}
+
+/* Make buttons responsive (stack on narrow widths) */
+@media (max-width: 420px) {
+  .share-card .buttons {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .share-card .buttons button {
+    width: 100%;
+  }
+  .shareComic{
+    justify-content: center;
+
+  }
+}
+
+

@@ -1,7 +1,9 @@
 import { useFavoritesStore } from '../../store/favoriteStore'
+import { useHistoryStore } from '../../store/historyStore';
 import type { ComicCardType } from '../../types'
 import './ComicCard.css'
 import { useEffect, useState } from "react"
+import { useNavigate } from 'react-router-dom';
 
 
 type ComicCardProps = {
@@ -10,7 +12,10 @@ type ComicCardProps = {
 }
 
 export default function ComicCard({ comic, onClick} : ComicCardProps) {
-  // inicializador seguro (evita crashes si comic es undefined)
+  const navigate = useNavigate()
+
+  const { addToHistory } = useHistoryStore()
+  
   const [isFavorite, setIsFavorite] = useState<boolean>(false)
 
   const { addFavorite, removeFavorite, favorites } = useFavoritesStore()
@@ -36,6 +41,11 @@ export default function ComicCard({ comic, onClick} : ComicCardProps) {
     setIsFavorite(!isFavorite)
   }
 
+  const handleClick = (comic : ComicCardType) => {
+    navigate(`/comics/details/${comic.id}`)
+    addToHistory(comic)
+  }
+
   // placeholder si no hay comic todavía (evita crash)
   if (!comic) {
     return (
@@ -55,7 +65,7 @@ export default function ComicCard({ comic, onClick} : ComicCardProps) {
       className="comic"
       tabIndex={0}
       role="button"
-      onClick={() => onClick?.()}
+      onClick={() => handleClick(comic)}
       onKeyDown={(e) => {
         if (e.key === "Enter" || e.key === " ") {
           e.preventDefault()

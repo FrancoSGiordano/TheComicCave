@@ -85,15 +85,13 @@
   cursor: pointer;
 }
 
-
-
-
-.favoriteSection{
+.buttons-section{
   display: flex;
   align-items: center;
   justify-content: flex-end;
   gap: 10px;
 }
+
 
 /*boton favorito*/
 .favorite{
@@ -107,6 +105,23 @@
 }
 
 .favorite:hover{ 
+  background: var(--efecto-boton); 
+  transform: translateY(-1px); 
+}
+
+
+/*boton favorito*/
+.history{
+  position: relative;
+  border: 0;
+  background: transparent;
+  padding: 8px;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+}
+
+.history:hover{ 
   background: var(--efecto-boton); 
   transform: translateY(-1px); 
 }
@@ -142,6 +157,15 @@
 }
 
 /*ocultar boton menu*/
+
+.header-bg{
+  width: 100%;
+  height: var(--height);   /* altura de la franja superior */
+  background: #1A1F2E;
+  z-index: 10;         
+}
+
+
 
 
 @media (max-width: 880px){

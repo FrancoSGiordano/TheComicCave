@@ -15,7 +15,12 @@ export default function AppLayout() {
     const { clearFilters } = useSearchStore()
     const [sideBarOpen, setSideBarOpen] = useState(true)
     const [isLanding, setIsLanding] = useState(location.pathname !== "/")
+  
 
+
+    const isDetailsPath = (pathname: string) => {
+    return /^\/comics\/details(\/|$)/.test(pathname)
+  }
 
     useEffect(() => {
       const isMobile = window.innerWidth < 768
@@ -23,11 +28,18 @@ export default function AppLayout() {
     },[location.pathname])
 
     useEffect(() => {
-      setIsLanding(location.pathname !== "/")
+      setIsLanding(location.pathname !== "/" && !isDetailsPath(location.pathname))
     }, [location.pathname])
 
     useEffect(() => {
-      if(location.pathname !== "/comics/search"){
+
+      const excludedBaseRoutes = ["/comics/search", "/comics/details", "/comics"];
+
+      const isExcluded = excludedBaseRoutes.some((base) =>
+        location.pathname.startsWith(base)
+      );
+
+      if(!isExcluded){
         clearFilters()
       }
     }, [location.pathname])
@@ -43,7 +55,7 @@ export default function AppLayout() {
                 <div className={`content ${sideBarOpen ? 'sidebar-open' : ''}`}>
                   
                   
-                  {location.pathname !== "/" && (
+                  {location.pathname !== "/" &&  !isDetailsPath(location.pathname) &&(
                       <SideBar
                         isOpen={sideBarOpen}    
                       />

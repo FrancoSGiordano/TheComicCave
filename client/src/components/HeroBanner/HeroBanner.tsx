@@ -9,8 +9,9 @@ export default function HeroBanner() {
 
     return (
       <section className="hero">
-        {/* imagen de fondo semántica (puede ser decorativa) */}
-        <img className="hero__img" src={banner} alt="" />
+        <div className='image-container'>
+          <img className="hero__img" src={banner} alt="" />
+        </div>
 
 
         <div className="hero__inner">

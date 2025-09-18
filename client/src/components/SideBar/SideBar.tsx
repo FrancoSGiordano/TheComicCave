@@ -95,7 +95,6 @@ export default function SideBar({isOpen} : SideBarProps) {
         <aside
           className={`category-aside ${isOpen ? 'open' : ''}`}
           role="complementary"
-          aria-expanded={isOpen}
         >
           {/* Search */}
           <div className="search-block">

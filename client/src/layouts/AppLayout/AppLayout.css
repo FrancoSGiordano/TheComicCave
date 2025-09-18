@@ -21,27 +21,22 @@
   min-height:100vh;
   display:flex;
   flex-direction:column;
-  background: var(--header-bg);
+  background: var(--bg);
 }
 
 
 
 .content {
   display:flex;
-  padding-top: var(--header-h); /*dejo el espacio arriba de lo que ocupa el header*/
   overflow-x: hidden;
 }
 
 
 .main-content {
   flex: 1;
-  padding: 28px 20px;
   background: var(--bg);
   color: var(--text);
 }
 
 /* Contenedor interno con max-width centrado */
-.main-content .container {
-  max-width: var(--max-width);
-  margin: 0 auto;
-}
+
