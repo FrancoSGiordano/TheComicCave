@@ -28,33 +28,32 @@ export const Pagination = ({
 
     return (
         <div className="pagination-container">
-        <button
-            onClick={prevPage}
-            disabled={page === 1}
-            className="pagination-button"
-        >
-            Anterior
-        </button>
 
-        {pageNumbers.map((p) => (
-            <button
-            key={p}
-            onClick={() => setPage(p)}
-            className={`pagination-button ${
-                p === page ? "active" : ""
-            }`}
-            >
-            {p}
-            </button>
-        ))}
+            <ul className="pagination">
+                <li className={page === 1 ? "disabled" : ""}>
+                    <a href="#" onClick={prevPage} >
+                        Anterior
+                    </a>
+                </li>
 
-        <button
-            onClick={nextPage}
-            disabled={page === totalPages}
-            className="pagination-button"
-        >
-            Siguiente
-        </button>
+                {pageNumbers.map((p) => (
+                <li key={p} className={p === page ? "active" : ""}>
+                    <a
+                    href="#"
+                    onClick={ () => setPage(p)}
+                    aria-current={p === page ? "page" : undefined}
+                    >
+                    {p}
+                    </a>
+                </li>
+                ))}
+
+                <li className={page === totalPages ? "disabled" : ""}>
+                    <a href="#" onClick={nextPage} >
+                        Siguiente
+                    </a>
+                </li>
+            </ul>
         </div>
     );
 };
