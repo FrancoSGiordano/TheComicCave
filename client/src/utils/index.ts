@@ -29,6 +29,11 @@ export const CHARACTER_IDS = [
   { id: 1009281, name: "Doctor Octopus" },
 ];
 
+export function getRandomCharacter (){
+  const random = Math.floor(Math.random() * CHARACTER_IDS.length)
+  return CHARACTER_IDS[random]
+}
+
 export function getTwoMonthRange(): string {
   const now = new Date();
 

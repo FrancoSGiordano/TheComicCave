@@ -20,7 +20,7 @@ export type Option = {
 
 export default function SideBar({isOpen} : SideBarProps) {
 
-    const { setFilters, filters, searchComic, setCharacterOption, characterOption} = useSearchStore() 
+    const { setFilters, filters, searchComic, setCharacterOption, characterOption, setNextSearch} = useSearchStore() 
     const [selectedCharacter, setSelectedCharacter] = useState<Option | null>(characterOption)
     const [enableCharacterFilter, setEnableCharacterFilter] = useState(characterOption ? true : false)
     const [searchTerm, setSearchTerm] = useState<string>(() => (filters.title ?? ""))
@@ -30,8 +30,10 @@ export default function SideBar({isOpen} : SideBarProps) {
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
+      setNextSearch();
       handleSearch();
     };
+    
     const handleSearch = () => {
 
       console.log(filters)
