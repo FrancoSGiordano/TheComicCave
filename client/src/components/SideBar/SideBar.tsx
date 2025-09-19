@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import './SideBar.css'
-import type { Character } from '../../types'
-import { getCharacters } from '../../api/MarvelAPI'
+import type { Character  } from '../../types'
+import { getCharacters  } from '../../api/MarvelAPI'
 import type { SingleValue } from 'react-select'
 import AsyncSelect from 'react-select/async'
 import { customStyles } from './SelectStyles'
@@ -20,10 +20,10 @@ export type Option = {
 
 export default function SideBar({isOpen} : SideBarProps) {
 
-    const { setFilters, filters, searchComic, setCharacterOption, characterOption } = useSearchStore() 
+    const { setFilters, filters, searchComic, setCharacterOption, characterOption} = useSearchStore() 
     const [selectedCharacter, setSelectedCharacter] = useState<Option | null>(characterOption)
     const [enableCharacterFilter, setEnableCharacterFilter] = useState(characterOption ? true : false)
-    const [searchTerm, setSearchTerm] = useState(filters.title)
+    const [searchTerm, setSearchTerm] = useState<string>(() => (filters.title ?? ""))
     const navigate = useNavigate()
 
     console.log(characterOption)
@@ -57,7 +57,7 @@ export default function SideBar({isOpen} : SideBarProps) {
       })
     }
 
-    const handleChange = (value : SingleValue<Option>) => {
+    const handleCharacterChange = (value : SingleValue<Option>) => {
       setSelectedCharacter(value)
       setFilters({
         characterId: value?.value
@@ -71,11 +71,11 @@ export default function SideBar({isOpen} : SideBarProps) {
 
     }
 
-    const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleCharacterCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       setEnableCharacterFilter(e.target.checked)
     }
 
-    const loadOptions = async (inputValue: string): Promise<Option[]> => {
+    const loadCharacterOptions = async (inputValue: string): Promise<Option[]> => {
       if (!inputValue) return [];
 
       const data = await getCharacters(inputValue);
@@ -87,10 +87,26 @@ export default function SideBar({isOpen} : SideBarProps) {
       return options
     };
 
+
+
+
+
+
+
+
+
     useEffect(() => {
       setEnableCharacterFilter(!!characterOption)
     }, [characterOption])
-  
+
+    useEffect(() => {
+      if (!enableCharacterFilter) {
+        setSelectedCharacter(null)
+        setCharacterOption(undefined)
+        setFilters({ characterId: undefined })
+      }
+    }, [enableCharacterFilter])
+
 
     return (
       <>
@@ -136,10 +152,10 @@ export default function SideBar({isOpen} : SideBarProps) {
               <div className='filters-block'>
                 <div className='checkbox-wrapper-2'>
                   <input
-                  className='sc-gJwTLC ikxBAC' 
+                    className='sc-gJwTLC ikxBAC' 
                     type="checkbox" 
                     checked={enableCharacterFilter}
-                    onChange={(e) => handleCheckboxChange(e)}
+                    onChange={(e) => handleCharacterCheckboxChange(e)}
                   />
                 </div>
 
@@ -150,8 +166,8 @@ export default function SideBar({isOpen} : SideBarProps) {
                     cacheOptions
                     defaultOptions
                     value={enableCharacterFilter ? selectedCharacter || null : null}
-                    loadOptions={loadOptions}
-                    onChange={handleChange}
+                    loadOptions={loadCharacterOptions}
+                    onChange={handleCharacterChange}
                     isClearable
                     placeholder="Filtrar por personaje..."
                     styles={customStyles}
@@ -161,6 +177,7 @@ export default function SideBar({isOpen} : SideBarProps) {
                   />
                 </div>
               </div>
+              
               
             </div>
               
