@@ -94,22 +94,16 @@ export default function Header({onToggleSideBar, quantity, isLanding}: HeaderPro
                     </button>
 
                     <button className='history' onClick={() => navigate("/comics/history")}>
-                    <svg
-                        className="icon"
-                        viewBox="0 0 24 24"
-                        width={24}
-                        height={24}
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth={1.5}
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        xmlns="http://www.w3.org/2000/svg"
-                        aria-hidden="true"
-                        focusable="false"
-                        >
-                        <path d="M12 1a11 11 0 1 0 11 11A11 11 0 0 0 12 1zm0 20a9 9 0 1 1 9-9 9 9 0 0 1-9 9zm.5-9.5V7h-1v5h5v-1z" />
-                    </svg>                        
+                        <svg 
+                            xmlns="http://www.w3.org/2000/svg" 
+                            fill="none" 
+                            viewBox="0 0 24 24" 
+                            strokeWidth="1.5" 
+                            stroke="currentColor" 
+                            className="icon">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                        </svg>
+                                        
                     </button>
 
 

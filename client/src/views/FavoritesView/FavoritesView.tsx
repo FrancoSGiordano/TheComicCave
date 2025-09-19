@@ -2,6 +2,7 @@ import ComicSection from '../../components/ComicSection/ComicSection'
 import { Pagination } from '../../components/Pagination/Pagination'
 import { useFavoritesStore } from '../../store/favoriteStore'
 import './FavoritesView.css'
+import Publicid from '../../components/Publicid/Publicid.tsx'
 
 export default function FavoritesView() {
 
@@ -14,7 +15,7 @@ export default function FavoritesView() {
                 title='Favoritos'
                 comics={visibleFavorites}
             />
-
+            <Publicid/>
         </div>
 
         <Pagination

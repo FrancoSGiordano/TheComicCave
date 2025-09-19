@@ -160,7 +160,7 @@ export default function Details({onToggleShareCard, isOpen}: DetailsProps) {
                         <h2>{comic.title}</h2>
                     </div>
                      <div className='date-container'>
-                        <h3 className='title'>Publicado:</h3>
+                        <h3 className='title'>PUBLICADO:</h3>
                         <p>{formatComicDate(comic.date) }</p>
                     </div>
                     <div className='description-container'>
@@ -168,7 +168,7 @@ export default function Details({onToggleShareCard, isOpen}: DetailsProps) {
                     </div>
 
                     <div className='creators-container'>
-                        <h3 className='title'>Creadores</h3>
+                        <h3 className='title'>CREADORES</h3>
                         <ul>
                         {comic.creators?.map((cr, i) => (
                             <li key={i}>{cr.name} {cr.role ? `: ${cr.role}` : ''}</li>
@@ -178,7 +178,7 @@ export default function Details({onToggleShareCard, isOpen}: DetailsProps) {
                 </div>
            </div>
 
-           {isOpen && comic && (
+           {comic && (
             <ShareCard isOpen={isOpen} comicSharing={comic} onClose={onToggleShareCard} />
             )}
         </section>

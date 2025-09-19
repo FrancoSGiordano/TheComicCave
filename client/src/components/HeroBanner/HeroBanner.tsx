@@ -22,13 +22,13 @@ export default function HeroBanner() {
               <span className="card-tag">Explorar</span>
               <div className='card-head'>
                 <h3 className="card-title">Explorá el universo Marvel</h3>
-                <p className="card-sub">Personajes, sinopsis y detalles</p>
+                <p className="card-sub">Personajes, sinopsis y autores</p>
 
               </div>
 
               <p className="card-desc">
                 Desde ComicCave podés ver información completa de todos los cómics
-                de Marvel: sinopsis, autores, portadas y ediciones.
+                de Marvel: sinopsis, autores y portadas.
               </p>
               <a className="card-button" onClick={() => navigate('/comics')}>Explorar</a>
             </article>

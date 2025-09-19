@@ -1,8 +1,4 @@
 :root{
-  --bg-darker: #0b0d0f;
-  --overlay: rgba(5,6,8,0.66);
-  --items: rgba(255,255,255,0.65);
-  --card-w: 320px;
   --max-width: 1100px;
 
 }
@@ -22,14 +18,14 @@
   inset: 0;                   
   z-index: 1;                 
   pointer-events: none;       
-  background: rgba(6,7,9,0.85) 100%;
-  backdrop-filter: blur(8px); 
+  background: #060709d9 ;
+  backdrop-filter: blur(8px);
 }
 
 
 .detail-header{
   position: relative;
-  z-index: 2; /* sobre el overlay */
+  z-index: 2; 
   max-width: var(--max-width);
   margin: 0 auto 1.25rem;
   padding: 0 1rem;
@@ -129,17 +125,16 @@ gap: 5px;
 /*contenedor de detalles*/
 .detail-content{
   position: relative;
-  z-index: 2; /* sobre el overlay */
+  z-index: 2;
   max-width: var(--max-width);
   margin: 0 auto;
   display: grid;
   grid-template-columns: 320px 1fr;
-  gap: 2rem;
+  gap: 3rem;
   align-items: start;
   padding: 0 1rem 2.5rem;
 }
 
-/* bloque de la portada/imágen */
 .detail-image{
   display:flex;
 }
@@ -151,53 +146,36 @@ gap: 5px;
 
 /*texto*/
 .detail-text{
-  color: white;
   line-height: 1.45;
 }
 
-/* título principal */
+/*título*/
 .title-container h2{
   margin-bottom:  0.75rem ;
-  font-size: 2rem;
+  font-size: 2.4rem;
   font-weight: 800;
   letter-spacing: 1px;
   text-transform: uppercase;
 }
 
-/* estilos para los campos (label + valor) tipo metadata */
 .date-container,
 .publisher-container{
   display: flex;
   gap: 1.25rem;
   align-items: baseline;
-  margin-bottom: 0.9rem;
 }
 
-/* la clase .title (en tu HTML la usas en h3) */
 .title{
   margin: 0;
   font-size: 0.9rem;
   font-weight: 700;
-  text-transform: uppercase;
-  color: var(--items);
-  min-width: 100px;
+  color: #AFABA9;
 }
 
-/* valor asociado a la etiqueta */
-.date-container p,
-.publisher-container p{
-  margin: 0;
-  color: #ffffff;
-  font-weight: 500;
-  font-size: 0.95rem;
-}
 
-/* descripción larga */
+/*descripción*/
 .description-container{
     margin-top: 1rem;
-    font-size: 0.98rem;
-    line-height: 1.6;
-    color: white;
     margin-bottom: 0.9rem;
 }
 
@@ -207,18 +185,14 @@ gap: 5px;
 }
 
 
-/* RESPONSIVE: en pantallas pequeñas apilar verticalmente */
-@media (max-width: 880px){
+@media (max-width: 768px){
   .detail-content{
     grid-template-columns: 1fr;
     gap: 1.1rem;
-    padding-bottom: 1.6rem;
   }
 
-  /* centrar la portada y hacerla más chica */
   .detail-image{
     justify-content: center;
-    margin-bottom: 0;
   }
 
   .detail-image img{
@@ -234,26 +208,8 @@ gap: 5px;
   .date-container,
   .publisher-container{
     flex-direction: column;
-    align-items: flex-start;
     gap: 0.15rem;
   }
 
-  .title{
-    min-width: 0;
-  }
 
-  .detail-text{
-    text-align: left;
-  }
-}
-
-/* Pantallas muy anchas, añade más separación horizontal para respirar */
-@media (min-width: 1400px){
-  .detail-content{
-    gap: 3rem;
-  }
-
-  .title-container h2{
-    font-size: 2.4rem;
-  }
 }

@@ -14,14 +14,21 @@ type ComicsStore = {
     loadSection: (key: string, ttl: number, filters?: ComicFilters) => Promise<void>
 }
 
+const sectionKeys = ["newReleasesSearch", "characterSection", "classics90"];
+const initialHasRotated: Record<string, boolean> = {};
 const initialSections = getLocalStorage("sections") || {}
-const initialHasRotate = getLocalStorage("hasRotate") || {}
 const initialVisible = getLocalStorage("visibleComics") || {}
+
+sectionKeys.forEach((key) => {
+  if (!(key in initialHasRotated)) {
+    initialHasRotated[key] = false;
+  }
+});
 
 
 export const useComicsStore = create<ComicsStore>((set, get) => ({
     sections: initialSections,
-    hasRotated: initialHasRotate,
+    hasRotated: initialHasRotated,
     visibleComics: initialVisible,
     loading: {},
 
@@ -30,7 +37,7 @@ export const useComicsStore = create<ComicsStore>((set, get) => ({
         const { hasRotated, sections, loading } = get()
         
         const cached = sections[key]
-
+        console.log(key, cached)
         if(cached){
             if(!hasRotated[key]){
                 console.log("Key: ", key)

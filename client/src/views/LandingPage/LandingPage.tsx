@@ -3,24 +3,21 @@ import HeroBanner from '../../components/HeroBanner/HeroBanner'
 import ComicSection from '../../components/ComicSection/ComicSection'
 import { useEffect } from 'react';
 import { getTwoMonthRange } from '../../utils';
-import { type ComicFilters } from '../../api/MarvelAPI';
+
 import { useComicsStore } from '../../store/comicStore';
 
 export default function LandingPage(){
 
     
     
-    const { sections, loadSection } = useComicsStore() 
-    const newReleases = sections["newReleases"] ?? []
+    const { visibleComics, loadSection } = useComicsStore() 
+    const newReleases = visibleComics["newReleases"] ?? []
     useEffect(() => {
-      if(newReleases.length === 0) {
-        const filters : ComicFilters = {
-          dateRange: getTwoMonthRange(),
-          limit: 32
-        }
-        loadSection("newReleases", 180, filters)
-      }
-    }, [newReleases.length])
+         loadSection("newReleases", 180, {
+            dateRange: getTwoMonthRange(),
+            limit: 32
+          });
+      },[newReleases.length, loadSection])
 
     return (
         <>    

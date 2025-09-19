@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react'
-import ComicSection from '../../components/ComicSection/ComicSection.tsx'
+import Publicid from '../../components/Publicid/Publicid.tsx'
 import '../../index.css'
 import './Home.css'
 import { useComicsStore } from '../../store/comicStore.ts'
 import { getRandomDates, getRandomPastMonthDateRange, getTwoMonthRange  } from '../../utils/index.ts'
+import ComicSection from '../../components/ComicSection/ComicSection.tsx'
 
 export default function Home() {
+
 
   const { loadSection, visibleComics} = useComicsStore()
   const newReleases = visibleComics["newReleasesSearch"] ?? []
@@ -14,13 +16,12 @@ export default function Home() {
   const [character, setCharacter] = useState("")
 
   useEffect(() => {
-      loadSection("newReleasesSearch", 180, {
+     loadSection("newReleasesSearch", 180, {
         dateRange: getRandomPastMonthDateRange(),
         limit: 32
       });
-  }, [newReleases.length, loadSection]);
-
-
+  },[newReleases.length, loadSection])
+     
   useEffect(() => {
       loadSection("characterSection", 5, {
         dateRange: getTwoMonthRange(),
@@ -56,11 +57,15 @@ export default function Home() {
                 title='Clasicos'
                 comics={classics}
               />
+
+              <Publicid/>
+
           </>
                 
-         
+
 
         </div>
+
     </>
   )
 }

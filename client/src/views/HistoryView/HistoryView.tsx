@@ -1,6 +1,7 @@
 import ComicSection from '../../components/ComicSection/ComicSection'
 import { useHistoryStore } from '../../store/historyStore'
 import './HistoryView.css'
+import Publicid from '../../components/Publicid/Publicid.tsx'
 
 export default function HistoryView() {
 
@@ -13,6 +14,8 @@ export default function HistoryView() {
                     title='Ultimas visitas...'
                     comics={historyComics}
                 />
+
+                <Publicid/>
             </div>
         </>
     )

@@ -2,6 +2,7 @@ import ComicSection from "../../components/ComicSection/ComicSection"
 import { Pagination } from "../../components/Pagination/Pagination"
 import { useSearchStore } from "../../store/searchStore"
 import './SearchView.css'
+import Publicid from '../../components/Publicid/Publicid.tsx'
 
 
 export default function SearchView() {
@@ -16,6 +17,8 @@ export default function SearchView() {
                     title="Resultados de busqueda..."
                     comics={comics}
                 />
+
+                <Publicid/>
             </div>
 
             <Pagination

@@ -15,6 +15,7 @@ type FavoritesState = {
   prevPage: () => void
 };
 
+
 const saved = JSON.parse(localStorage.getItem('favorites') || '{"favorites": [], "quantity": 0}');
 
 

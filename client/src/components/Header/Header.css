@@ -1,9 +1,4 @@
 :root{
-  --surface: #242938;       /* superficie input/areas */
-  --border: rgba(232,227,211,0.06);
-  --heart: #FF4757;        /* rojo acento */
-  --titleColor: #F9D92E;     /* amarillo (tu título) */
-  --text: #E8E3D3;
   --efecto-boton: rgba(255,255,255,0.03);
   --height: 68px;
 }
@@ -13,7 +8,7 @@
   position: fixed;
   left: 0;
   right: 0;
-  z-index: 60;
+  z-index: 10;
   backdrop-filter: blur(6px);
   display:flex;
   align-items:center;
@@ -27,7 +22,7 @@
   max-width: 1280px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: minmax(180px, 1fr) 160px minmax(160px, 1fr);
+  grid-template-columns: minmax(180px, 1fr) 1fr minmax(160px, 1fr);
   align-items: center;
   gap: 12px;
 }
@@ -39,14 +34,14 @@
   gap: 12px;
 }
 
-/* Menu button */
+/*Menu*/
 .menuButton,
 .menuButton:focus{
   border: 0;
   background: transparent;
   padding: 8px;
   border-radius: 8px;
-  color: var(--text);
+  color: #E8E3D3;
   cursor: pointer;
 }
 
@@ -59,7 +54,7 @@
 
 
 .title .text-title{
-  color: var(--titleColor);
+  color: #F9D92E;
   font-family: 'Bangers';
   font-weight: 400;
   font-size: 1.6rem;
@@ -137,7 +132,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: var(--heart);
+  background: #FF4757;
   font-size: 11px;
   font-weight: 700;
   border-radius: 100%;
@@ -156,34 +151,29 @@
   justify-content: center;
 }
 
-/*ocultar boton menu*/
 
+/*barra de fondo de header*/
 .header-bg{
   width: 100%;
-  height: var(--height);   /* altura de la franja superior */
+  height: var(--height);
   background: #1A1F2E;
-  z-index: 10;         
+  z-index: 9;         
 }
 
 
 
 
-@media (max-width: 880px){
-  .header-content{
-    grid-template-columns: auto 1fr auto;
-    gap: 8px;
-  }
+@media (max-width: 768px){
 
   .title .text-title{
     font-size: 1.25rem;
   }
 }
 
-@media (max-width: 520px){
-  .header{
-    padding: 0 12px;
-  }
+@media (max-width: 480px){
+
   .title .text-title{ display: none; }
-  .logo img{ height: 60px; }
+  .logo img{ height: 70px; }
   .header-content{ grid-template-columns: auto 1fr auto; }
+  .logo{ justify-content: start;}
 }
