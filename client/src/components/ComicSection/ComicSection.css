@@ -11,7 +11,7 @@ h2{
   font-family: 'Bangers';
   font-size: 2rem;
   letter-spacing: 0.1rem;
-  color: #E8E3D3;
+  color: var(--vintageText);
   font-weight: 100;
 }
 
@@ -25,6 +25,7 @@ h2{
   align-items: center;
   text-align: center;
   font-family: 'Bangers';
+  color: var(--vintageText);
   letter-spacing: 0.1rem;
   white-space: nowrap;
 }

@@ -5,7 +5,7 @@
   left: 0;
   height: calc(100vh - 4rem);
   width: 20rem;
-  background: #1A1F2E;
+  background: var(--bg2);
   transform: translateX(-100%);
   z-index: 6;
   box-sizing: border-box;
@@ -86,7 +86,7 @@
   border: 1px solid rgba(232,227,211,0.1);
   border-radius: 0.5rem;
   background: #242938;
-  color: #E8E3D3;
+  color: var(--vintageText);
   font-size: 1rem;
   line-height: 1.25;
   box-sizing: border-box;
@@ -173,7 +173,10 @@
   }
 
 
-.clear-button { text-align: center; }
+.clear-button {
+   text-align: center; 
+}
+
 .clear-button .button {
   padding: 0.5rem 1rem;
   border-radius: 8px;
@@ -182,9 +185,15 @@
   color: #fff;
   cursor: pointer;
 }
-.clear-button .button:hover { opacity: 0.9; }
+.clear-button .button:hover {
+     transform: translateY(-2px);
+  box-shadow: 0 10px 15px rgba(0,0,0,.45);
+}
 
-
+.clear-button .button:active {
+  transform: translateY(1px);
+  box-shadow: 0 5px 15px rgba(0,0,0,.45);
+}
 
 
 

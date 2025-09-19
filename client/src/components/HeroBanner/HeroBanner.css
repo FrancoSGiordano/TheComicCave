@@ -81,7 +81,7 @@
 }
 
 .card-head{
-  background: #E8E3D3; 
+  background: var(--vintageText); 
   padding: 8px 10px;
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.12);
