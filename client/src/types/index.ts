@@ -26,7 +26,10 @@ export type Creator = {
   name: string
   role: string
 }
-
+export type CreatorSearch = {
+  id: number
+  name: string
+}
 export type ComicDetails = {
   id: number
   title: string

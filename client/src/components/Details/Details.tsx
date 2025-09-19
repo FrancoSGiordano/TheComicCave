@@ -5,6 +5,7 @@ import type { ComicCardType, ComicDetails } from '../../types';
 import { fetchComicById } from '../../api/MarvelAPI'
 import { useFavoritesStore } from '../../store/favoriteStore'
 import ShareCard from '../ShareCard/ShareCard';
+import Loader from '../Loader/Loader';
 
 
 interface DetailsProps{
@@ -46,26 +47,40 @@ export default function Details({onToggleShareCard, isOpen}: DetailsProps) {
         })
     }, [id])
 
-        useEffect(() => {
-    setIsFavorite(favorites.some((fav) => fav.id === comic?.id));
-     }, [favorites, comic?.id]);
+    useEffect(() => {
+        setIsFavorite(favorites.some((fav) => fav.id === comic?.id));
+    }, [favorites, comic?.id]);
 
-    if (loading) return <p>Cargando...</p>
-    if (error) return <p>Error: {error}</p>
-    if (!comic) return <p>No se encontró el cómic.</p>
-    
+    if (loading)  return (
+      <div className="details-loading-container">
+        <Loader size={64} />
+      </div>
+    );
+
+    if (error) return(
+      <div className="details-loading-container">
+        <p >Error: {error}</p>
+      </div>
+    ) 
+    if (!comic) return(
+      <div className="details-loading-container">
+        <p>No se encontró el cómic.</p>
+      </div>
+    )  
+        
     function formatComicDate(rawIso?: string | null) {
         if (!rawIso) return "—";
         try {
             const d = new Date(rawIso);
             return d.toLocaleDateString("es-AR", {
-            day: "numeric",
-            month: "long",
-            year: "numeric",
+                day: "numeric",
+                month: "long",
+                year: "numeric",
             });
-        } catch {
-        return rawIso;
-    }
+        } 
+        catch {
+            return rawIso;
+        }   
     }
 
 

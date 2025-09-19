@@ -1,14 +1,8 @@
 :root{
   --bg: #0F1419;
-  --header-bg: #1A1F2E;
-  --surface: #111418;
-  --muted: #A8A29E;
-  --text: #E6EEF2;
-  --sidebar-w: 280px;
-  --header-h: 68px; 
-  --max-width: 1100px;
-  --gap: 1rem;
-  --radius: 10px;
+  --bg2: #1A1F2E;
+  --corazon: #FF4757;
+  --vintageText: #E8E3D3
 }
 
 *{
@@ -16,7 +10,7 @@
   font-family: 'Roboto' ;
 }
 
-/* Contenedor general (equivalente a min-h-screen) */
+/* Contenedor general*/
 .totalbody{
   min-height:100vh;
   display:flex;
@@ -35,8 +29,6 @@
 .main-content {
   flex: 1;
   background: var(--bg);
-  color: var(--text);
 }
 
-/* Contenedor interno con max-width centrado */
 

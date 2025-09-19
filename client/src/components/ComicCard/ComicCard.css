@@ -2,7 +2,7 @@
   cursor: pointer;
   display: flex;
   flex-direction: column;
-  background: #1A1F2E;
+  background: var(--bg2);
   border-radius: 10px;
   overflow: hidden;
   border: 1px solid #2b2c31;
@@ -50,7 +50,7 @@
 
 /*marcar favorito*/
 .favorite-button.is-fav {
-  background: #FF4757;
+  background: var(--corazon);
 }
 
 /*icono*/
@@ -67,7 +67,7 @@
 }
 
 .comic-title {
-  color: #E8E3D3;
+  color: var(--vintageText);
   font-size: 1rem;
   font-weight:bold;
   line-height: 1.2;

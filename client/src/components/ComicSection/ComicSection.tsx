@@ -21,7 +21,7 @@ export default function ComicSection({title, comics} : ComicSectionProps) {
             .map((comic) => (
               <ComicCard
                 key={comic.id}
-                comic={comic}                       // <-- pasamos el objeto completo
+                comic={comic}                  
                 onClick={() => console.log('Abrir detalle de', comic.title)}
               />
           ))

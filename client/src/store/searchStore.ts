@@ -9,11 +9,13 @@ type SearchState = {
     filters: ComicFilters
     resultsByPage: Record<number, ComicCardType[]>
     characterOption: Option | null
+    creatorOption: Option | null
     page: number
     total: number
     limit: number
     setFilters: (filters: ComicFilters) => void
     setCharacterOption: (characterOption : Option | null | undefined) => void
+    setCreatorOption: (creatorOption : Option | null | undefined) => void
     searchComic: () => Promise<void>
     setNextSearch: () => void
     clearFilters: () => void
@@ -30,6 +32,9 @@ const initialFilters = storedFilters.filters ? storedFilters.filters : storedFil
 const storedOption = JSON.parse(localStorage.getItem("characterOption") || "null");
 const initialOption = storedOption ? storedOption : null;
 
+const storedCreatorOption = JSON.parse(localStorage.getItem("creatorOption") || "null");
+const initialCreatorOption = storedCreatorOption ? storedCreatorOption : null;   
+
 const storedResults = JSON.parse(localStorage.getItem("resultsByPage") || "{}");
 const initialResults = storedResults ? storedResults : {};
 
@@ -45,6 +50,7 @@ export const useSearchStore = create<SearchState>((set, get) => ({
     filters: initialFilters,
     resultsByPage: initialResults,
     characterOption: initialOption,
+    creatorOption: initialCreatorOption,
     page: initialPage,
     total: initialTotal,
     limit: 16,
@@ -83,6 +89,17 @@ export const useSearchStore = create<SearchState>((set, get) => ({
             set({ characterOption: null });
         }
     },
+
+    setCreatorOption: (option: Option | null | undefined) => {
+        if(option) {
+            localStorage.setItem("creatorOption", JSON.stringify(option))
+            set({ creatorOption: option })
+        } else {
+            localStorage.removeItem("creatorOption");
+            set({ creatorOption: null });
+        }
+    },
+
     clearFilters: () => {
         set({ filters: {}});
         localStorage.removeItem("filters");
@@ -97,6 +114,7 @@ export const useSearchStore = create<SearchState>((set, get) => ({
         })
         localStorage.removeItem("resultsByPage");
         localStorage.removeItem("characterOption");
+        localStorage.removeItem("creatorOption");
         localStorage.removeItem("total");
         localStorage.removeItem('actualPage')
     },

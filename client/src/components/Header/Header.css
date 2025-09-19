@@ -41,7 +41,7 @@
   background: transparent;
   padding: 8px;
   border-radius: 8px;
-  color: #E8E3D3;
+  color: white;
   cursor: pointer;
 }
 
@@ -156,7 +156,7 @@
 .header-bg{
   width: 100%;
   height: var(--height);
-  background: #1A1F2E;
+  background: var(--bg2);
   z-index: 9;         
 }
 
