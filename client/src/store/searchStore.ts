@@ -17,6 +17,7 @@ type SearchState = {
     setCharacterOption: (characterOption : Option | null | undefined) => void
     setCreatorOption: (creatorOption : Option | null | undefined) => void
     searchComic: () => Promise<void>
+    setNextSearch: () => void
     clearFilters: () => void
     setPage: (page: number) => void
     nextPage: () => void
@@ -100,8 +101,17 @@ export const useSearchStore = create<SearchState>((set, get) => ({
     },
 
     clearFilters: () => {
-        set({ filters: {}, resultsByPage: {}, characterOption: null, total: 0, page: 1 });
+        set({ filters: {}});
         localStorage.removeItem("filters");
+        
+    },
+    setNextSearch: () => {
+        set({
+            resultsByPage: {},
+            characterOption: null,
+            total: 0,
+            page: 1
+        })
         localStorage.removeItem("resultsByPage");
         localStorage.removeItem("characterOption");
         localStorage.removeItem("creatorOption");
