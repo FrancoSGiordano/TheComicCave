@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import './SideBar.css'
-import type { Character } from '../../types'
-import { getCharacters } from '../../api/MarvelAPI'
+import type { Character, CreatorSearch } from '../../types'
+import { getCharacters, getCreators } from '../../api/MarvelAPI'
 import type { SingleValue } from 'react-select'
 import AsyncSelect from 'react-select/async'
 import { customStyles } from './SelectStyles'
@@ -20,10 +20,12 @@ export type Option = {
 
 export default function SideBar({isOpen} : SideBarProps) {
 
-    const { setFilters, filters, searchComic, setCharacterOption, characterOption } = useSearchStore() 
+    const { setFilters, filters, searchComic, setCharacterOption, characterOption, setCreatorOption, creatorOption} = useSearchStore() 
     const [selectedCharacter, setSelectedCharacter] = useState<Option | null>(characterOption)
     const [enableCharacterFilter, setEnableCharacterFilter] = useState(characterOption ? true : false)
-    const [searchTerm, setSearchTerm] = useState(filters.title)
+    const [selectedCreator, setSelectedCreator] = useState<Option | null>(creatorOption) 
+    const [enableCreatorFilter, setEnableCreatorFilter] = useState(creatorOption ? true : false)
+    const [searchTerm, setSearchTerm] = useState<string>(() => (filters.title ?? ""))
     const navigate = useNavigate()
 
     console.log(characterOption)
@@ -57,7 +59,7 @@ export default function SideBar({isOpen} : SideBarProps) {
       })
     }
 
-    const handleChange = (value : SingleValue<Option>) => {
+    const handleCharacterChange = (value : SingleValue<Option>) => {
       setSelectedCharacter(value)
       setFilters({
         characterId: value?.value
@@ -71,11 +73,11 @@ export default function SideBar({isOpen} : SideBarProps) {
 
     }
 
-    const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleCharacterCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       setEnableCharacterFilter(e.target.checked)
     }
 
-    const loadOptions = async (inputValue: string): Promise<Option[]> => {
+    const loadCharacterOptions = async (inputValue: string): Promise<Option[]> => {
       if (!inputValue) return [];
 
       const data = await getCharacters(inputValue);
@@ -87,11 +89,78 @@ export default function SideBar({isOpen} : SideBarProps) {
       return options
     };
 
+
+
+
+    const handleCreatorChange = (value : SingleValue<Option>) => {
+      setSelectedCreator(value)
+      setFilters({
+        creatorId: value?.value
+      })
+      setCreatorOption(
+        value ? {
+          value: value.value,
+          label: value.label
+        } : undefined
+      );
+    }
+
+    const handleCreatorCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      setEnableCreatorFilter(e.target.checked)
+    }
+
+    const loadCreatorOptions = async (inputValue: string): Promise<Option[]> => {
+      if (!inputValue) return [];
+
+      const data = await getCreators(inputValue);
+      const options = data.map((c: CreatorSearch) => ({ label: c.name, value: c.id }));
+      return options;
+    };
+
+
+  const handleClearAllFilters = async () => {
+ 
+    setSelectedCharacter(null)
+    setEnableCharacterFilter(false)
+    setCharacterOption(undefined)
+
+    setSelectedCreator(null)
+    setEnableCreatorFilter(false)
+    setCreatorOption(undefined)
+
+    setSearchTerm("")
+
+    // opcional: volver al listado principal y recargar la página 1
+    navigate('/comics')
+
+    // disparar la búsqueda para recargar resultados (tu clearFilters ya dejó resultsByPage vacío)
+    await searchComic()
+  }
+
+
     useEffect(() => {
       setEnableCharacterFilter(!!characterOption)
     }, [characterOption])
   
+    useEffect(() => {
+      setEnableCreatorFilter(!!creatorOption)
+    }, [creatorOption])
 
+    useEffect(() => {
+      if (!enableCharacterFilter) {
+        setSelectedCharacter(null)
+        setCharacterOption(undefined)
+        setFilters({ characterId: undefined })
+      }
+    }, [enableCharacterFilter])
+
+    useEffect(() => {
+      if (!enableCreatorFilter) {
+        setSelectedCreator(null)
+        setCreatorOption(undefined)
+        setFilters({ creatorId: undefined })
+      }
+    }, [enableCreatorFilter])
     return (
       <>
 
@@ -136,10 +205,10 @@ export default function SideBar({isOpen} : SideBarProps) {
               <div className='filters-block'>
                 <div className='checkbox-wrapper-2'>
                   <input
-                  className='sc-gJwTLC ikxBAC' 
+                    className='sc-gJwTLC ikxBAC' 
                     type="checkbox" 
                     checked={enableCharacterFilter}
-                    onChange={(e) => handleCheckboxChange(e)}
+                    onChange={(e) => handleCharacterCheckboxChange(e)}
                   />
                 </div>
 
@@ -150,8 +219,8 @@ export default function SideBar({isOpen} : SideBarProps) {
                     cacheOptions
                     defaultOptions
                     value={enableCharacterFilter ? selectedCharacter || null : null}
-                    loadOptions={loadOptions}
-                    onChange={handleChange}
+                    loadOptions={loadCharacterOptions}
+                    onChange={handleCharacterChange}
                     isClearable
                     placeholder="Filtrar por personaje..."
                     styles={customStyles}
@@ -162,8 +231,48 @@ export default function SideBar({isOpen} : SideBarProps) {
                 </div>
               </div>
               
+              <div className='filters-block' style={{ marginTop: '0.5rem' }}>
+                <div className='checkbox-wrapper-2'>
+                  <input
+                    className='sc-gJwTLC ikxBAC' 
+                    type="checkbox"
+                    checked={enableCreatorFilter}
+                    onChange={(e) => handleCreatorCheckboxChange(e)}
+                  />
+                </div>
+
+                <div className="select-creator">
+                  <AsyncSelect
+                    className='custom-select'
+                    classNamePrefix="custom"
+                    cacheOptions
+                    defaultOptions
+                    value={enableCreatorFilter ? selectedCreator || null : null}
+                    loadOptions={loadCreatorOptions}
+                    onChange={handleCreatorChange}
+                    isClearable
+                    placeholder="Filtrar por creador..."
+                    styles={customStyles}
+                    noOptionsMessage={() => "No hay opciones"}
+                    loadingMessage={() => "Cargando..."}
+                    isDisabled={!enableCreatorFilter}
+                  />
+                </div>
+              </div>
             </div>
               
+          </div>
+
+          <div className="clear-button" style={{ marginTop: "1rem" }}>
+            <button
+              type="button"
+              className="button"
+              aria-label="Limpiar todos los filtros"
+              onClick={handleClearAllFilters}
+
+            >
+              Limpiar filtros
+            </button>
           </div>
 
           

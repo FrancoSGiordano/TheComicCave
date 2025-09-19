@@ -1,5 +1,5 @@
 import md5 from "md5"
-import type { Character, ComicCardType, Creator, ComicDetails } from "../types"
+import type { Character, ComicCardType, Creator, CreatorSearch, ComicDetails } from "../types"
 
 
 export type ComicFilters = {
@@ -31,6 +31,7 @@ export default async function fetchComics(filters: ComicFilters) {
     if(filters.offset) url += `&offset=${filters.offset}`
     if(filters.orderBy) url += `&orderBy=${filters.orderBy}`
     if(filters.characterId) url += `&characters=${filters.characterId}`
+    if(filters.creatorId) url += `&creators=${filters.creatorId}`
 
     try {
         const response = await fetch(url)
@@ -92,6 +93,32 @@ export async function getCharacters(query?: string, limit : number = 5){
 
 }
 
+export async function getCreators(query?: string, limit: number = 5) {
+  const ts = new Date().getTime().toString();
+  const hash = md5(ts + privateKey + publicKey);
+
+  const params: Record<string, string> = {
+    ts,
+    apikey: publicKey,
+    hash,
+    limit: limit.toString(),
+  };
+
+  if (query) {
+    params.nameStartsWith = query;
+  }
+
+  const url = `${baseURL}/creators?${new URLSearchParams(params).toString()}`;
+  const response = await fetch(url);
+  const data = await response.json();
+
+  const creators: CreatorSearch[] = (data.data?.results ?? []).map((c: any) => ({
+    id: c.id,
+    name: c.fullName  ?? "Sin nombre",
+  }));
+
+  return creators;
+}
 
 export async function fetchComicById(id: number | string): Promise<ComicDetails | null> {
   if (!id) return null

@@ -103,7 +103,7 @@
   border-color: transparent;
 }
 
-.select-character{
+.select-character, .select-creator{
   width: 250px;
 }
 
@@ -173,6 +173,16 @@
   }
 
 
+.clear-button { text-align: center; }
+.clear-button .button {
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.08);
+  color: #fff;
+  cursor: pointer;
+}
+.clear-button .button:hover { opacity: 0.9; }
 
 
 
@@ -180,7 +190,7 @@
 
 
 @media (max-width: 480px){
-  .select-character { max-width: 100%;}
+  .select-character .select-creator{ max-width: 100%;}
   .category-aside{ 
     padding: 0.75rem; 
     width: 18rem;

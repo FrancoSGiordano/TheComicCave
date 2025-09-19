@@ -184,6 +184,14 @@ gap: 5px;
 
 }
 
+.details-loading-container {
+  min-height: 40vh; /* se adapta según el layout */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  color: #fff;
+}
 
 @media (max-width: 768px){
   .detail-content{
@@ -213,3 +221,6 @@ gap: 5px;
 
 
 }
+
+
+

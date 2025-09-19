@@ -13,7 +13,7 @@ export default function Home() {
   const newReleases = visibleComics["newReleasesSearch"] ?? []
   const randomCharacterComcis = visibleComics["characterSection"] ?? []
   const classics = visibleComics["classics90"] ?? []
-  const [character, setCharacter] = useState<string>("")
+  const [character, setCharacter] = useState("")
 
   useEffect(() => {
      loadSection("newReleasesSearch", 180, {
