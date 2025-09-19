@@ -12,7 +12,7 @@ export default function AppLayout() {
     
     const location = useLocation()
     const {quantity} = useFavoritesStore()
-    const { clearFilters } = useSearchStore()
+    const { clearFilters, setNextSearch } = useSearchStore()
     const [sideBarOpen, setSideBarOpen] = useState(true)
     const [isLanding, setIsLanding] = useState(location.pathname !== "/")
   
@@ -41,6 +41,7 @@ export default function AppLayout() {
 
       if(!isExcluded){
         clearFilters()
+        setNextSearch()
       }
     }, [location.pathname])
 
