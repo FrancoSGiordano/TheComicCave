@@ -3,46 +3,38 @@ import ComicSection from '../../components/ComicSection/ComicSection.tsx'
 import '../../index.css'
 import './Home.css'
 import { useComicsStore } from '../../store/comicStore.ts'
-import type { ComicFilters } from '../../api/MarvelAPI.ts'
 import { getRandomDates, getRandomPastMonthDateRange, getTwoMonthRange  } from '../../utils/index.ts'
 
 export default function Home() {
 
-  const { sections, loadSection } = useComicsStore()
-  const newReleases = sections["newReleasesSearch"] ?? []
-  const randomCharacterComcis = sections["characterSection"] ?? []
-  const classics = sections["classics90"] ?? []
+  const { loadSection, visibleComics} = useComicsStore()
+  const newReleases = visibleComics["newReleasesSearch"] ?? []
+  const randomCharacterComcis = visibleComics["characterSection"] ?? []
+  const classics = visibleComics["classics90"] ?? []
   const [character, setCharacter] = useState("")
 
   useEffect(() => {
-    if(newReleases.length === 0) {
-      const filters : ComicFilters = {
+      loadSection("newReleasesSearch", 180, {
         dateRange: getRandomPastMonthDateRange(),
         limit: 32
-      }
-      loadSection("newReleasesSearch", 180, filters)
-    }
-  }, [newReleases.length])
+      });
+  }, [newReleases.length, loadSection]);
+
 
   useEffect(() => {
-    if(randomCharacterComcis.length === 0) {
-      const filters : ComicFilters = {
+      loadSection("characterSection", 5, {
         dateRange: getTwoMonthRange(),
         limit: 32
-      }
-      loadSection("characterSection", 5, filters)
-    }
-  }, [randomCharacterComcis.length])
+      });
+  }, [randomCharacterComcis.length, loadSection]);
 
   useEffect(() => {
-   if(classics.length === 0) {
-      const filters : ComicFilters = {
+      loadSection("classics90", 180, {
         dateRange: getRandomDates(),
         limit: 32
-      }
-      loadSection("classics90", 180, filters)
-    }
-  }, [classics.length])
+      });
+  }, [classics.length, loadSection]);
+
 
 
   return (

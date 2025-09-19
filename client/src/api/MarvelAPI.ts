@@ -36,18 +36,25 @@ export default async function fetchComics(filters: ComicFilters) {
         const response = await fetch(url)
         const data = await response.json()
 
-        console.log(data)
-
         const comics: ComicCardType[] = data.data.results.map((c:any) => ({
             id: c.id,
             title: c.title,
             imageUrl: `${c.thumbnail.path}/portrait_uncanny.${c.thumbnail.extension}`,
             description: c.description
         }))
-        console.log(comics)
-        return comics
+
+        const total: number = data.data.total
+        console.log("Llamada a la api")
+        return {
+          comics,
+          total
+        }
     } catch (error) {
         console.error("Error fetching comics:", error);
+        return {
+          comics: [],
+          total: 0
+        }
     }
 }
 

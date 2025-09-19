@@ -8,48 +8,86 @@ import fetchComics from "../api/MarvelAPI"
 
 type ComicsStore = {
     sections: Record<string, ComicCardType[]>
+    visibleComics: Record<string, ComicCardType[]>
     hasRotated: Record<string, boolean>
+    loading: Record<string, boolean>
     loadSection: (key: string, ttl: number, filters?: ComicFilters) => Promise<void>
 }
 
+const initialSections = getLocalStorage("sections") || {}
+const initialHasRotate = getLocalStorage("hasRotate") || {}
+const initialVisible = getLocalStorage("visibleComics") || {}
+
+
 export const useComicsStore = create<ComicsStore>((set, get) => ({
-    sections: {},
-    hasRotated: {},
+    sections: initialSections,
+    hasRotated: initialHasRotate,
+    visibleComics: initialVisible,
+    loading: {},
 
     loadSection: async(key, ttl, filters) => {
-        const { hasRotated } = get()
-        const cached = getLocalStorage(key) || []
-        if(cached.length > 0) {
+
+        const { hasRotated, sections, loading } = get()
+        
+        const cached = sections[key]
+
+        if(cached){
             if(!hasRotated[key]){
+                console.log("Key: ", key)
                 const data = rotateComics(cached, `${key}Index`)
                 set((state) => ({
-                    sections: {
-                        ...state.sections, [key]: data
+                    visibleComics: {
+                        ...state.visibleComics,
+                        [key]: data
                     },
                     hasRotated:{
                         ...state.hasRotated, [key]: true
                     }
                 }))
+                return
             }  
         } else {
+            if(loading[key]) {
+                return
+            }
+
+            set((state) => ({
+                loading: {...state.loading, [key]: true}
+            }))
+            
             const defaultFilters: ComicFilters = filters ?? {
                 dateRange: getTwoMonthRange(),
                 limit: 32
             }
 
-            const data = await fetchComics(defaultFilters)
-            if(data) {
+            try {
+                const data = await fetchComics(defaultFilters)
+                if(data) {
+                    set((state) => ({
+                        sections: {
+                            ...state.sections, [key]: data.comics
+                        },
+                        hasRotated:{
+                            ...state.hasRotated, [key]: false
+                        },
+                        visibleComics: {
+                            ...state.visibleComics,
+                            [key]: data.comics.slice(0, 8)
+                        },
+                        loading: {...state.loading, [key]: false}
+                    }))
+                    localStorage.setItem(`${key}Index`, "8")
+                    setLocalStorage("sections", get().sections, ttl)
+                    setLocalStorage("visibleComics", get().visibleComics, ttl)
+                    setLocalStorage("hasRotate", get().hasRotated, ttl)
+                }
+            } catch (err) {
+                console.error(err)
                 set((state) => ({
-                    sections: {
-                        ...state.sections, [key]: data.slice(0, 8)
-                    },
-                    hasRotated:{
-                        ...state.hasRotated, [key]: true
-                    }
+                    loading: { ...state.loading, [key]: false }
                 }))
-                setLocalStorage(key, data, ttl)
             }
-        }
+        }   
         
     }
 }))

@@ -1,20 +1,31 @@
 import ComicSection from "../../components/ComicSection/ComicSection"
+import { Pagination } from "../../components/Pagination/Pagination"
 import { useSearchStore } from "../../store/searchStore"
 import './SearchView.css'
 
 
 export default function SearchView() {
 
-    const { results } = useSearchStore()
+    const { resultsByPage, page, total, limit, setPage, nextPage, prevPage } = useSearchStore()
+    const comics = resultsByPage[page] ?? []
 
     return (
         <>
             <div className="comicsBody">
                 <ComicSection
                     title="Resultados de busqueda..."
-                    comics={results}
+                    comics={comics}
                 />
             </div>
+
+            <Pagination
+                page={page}
+                total={total}
+                limit={limit}
+                setPage={setPage}
+                nextPage={nextPage}
+                prevPage={prevPage}
+            />
         
         </>
     )
