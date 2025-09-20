@@ -158,6 +158,7 @@ export default function ShareCard( {onClose, isOpen, comicSharing}: ShareCardPro
               id='emisor'
               name='emisor'
               type="email"
+              className='email'
               placeholder='tuemail@mail.com'
               value={emisor}
               onChange={handleEmisorChange}
@@ -174,6 +175,7 @@ export default function ShareCard( {onClose, isOpen, comicSharing}: ShareCardPro
               id='destino'
               name='destino'
               type="email"
+              className='email'
               placeholder='emaildestino@mail.com'
               value={destino}
               onChange={handleDestinoChange}

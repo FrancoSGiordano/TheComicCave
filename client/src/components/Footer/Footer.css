@@ -12,7 +12,6 @@ footer {
 .footer-grid{
   display: grid;
   grid-template-columns: 35% 35% 30%;
-  padding-left: 1rem;
   justify-items: center; 
 }
 
@@ -21,7 +20,9 @@ footer {
   flex-direction: column;
   padding-top: 1rem;
   align-items: flex-start; 
-  margin: 0;               
+  margin: 0;
+  padding-left: 1rem;
+               
 }
 .footer-map {
   width: 100%;
