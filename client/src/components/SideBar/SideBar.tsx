@@ -32,7 +32,7 @@ export default function SideBar({isOpen} : SideBarProps) {
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
-      setNextSearch();
+      setNextSearch()
       handleSearch();
     };
     

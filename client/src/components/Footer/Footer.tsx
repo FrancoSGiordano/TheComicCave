@@ -8,7 +8,7 @@ export default function Footer() {
             <div className='footer-grid'>
               <div className='sectiontext'>
                 <h4 className="footer-text">Desarrollado por:</h4>
-                <p>Giordano Franco - fransantinogiordano@gmail.com</p>
+                <p>Giordano Franco - fran.santino.giordano@gmail.com</p>
                 <p>Lapegna Iván - lapegnaivan@gmail.com</p>
               </div>
               <div className='sectiontext'>

@@ -103,18 +103,17 @@ export const useSearchStore = create<SearchState>((set, get) => ({
     clearFilters: () => {
         set({ filters: {}});
         localStorage.removeItem("filters");
+        localStorage.removeItem("characterOption");
+        localStorage.removeItem("creatorOption");
         
     },
     setNextSearch: () => {
         set({
             resultsByPage: {},
-            characterOption: null,
             total: 0,
             page: 1
         })
-        localStorage.removeItem("resultsByPage");
-        localStorage.removeItem("characterOption");
-        localStorage.removeItem("creatorOption");
+        localStorage.removeItem("resultsByPage");     
         localStorage.removeItem("total");
         localStorage.removeItem('actualPage')
     },
