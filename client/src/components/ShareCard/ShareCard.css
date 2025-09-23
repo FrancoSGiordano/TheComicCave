@@ -170,7 +170,7 @@ textarea {
 }
 
 
-.email .comentario{
+.email, .comentario{
   color: white;
 }
 /*para tablet*/

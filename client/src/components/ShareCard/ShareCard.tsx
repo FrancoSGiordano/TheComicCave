@@ -190,6 +190,7 @@ export default function ShareCard( {onClose, isOpen, comicSharing}: ShareCardPro
             <textarea 
               id="comentario" 
               name="comentario" 
+              className='comentario'
               rows={4} 
               placeholder='Opcional: Ingrese un comentario' 
               value={message}
