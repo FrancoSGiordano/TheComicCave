@@ -37,6 +37,7 @@ export default function ShareCard( {onClose, isOpen, comicSharing}: ShareCardPro
 
   const handleCancel = () => {
     if (onClose) onClose();
+    handleReset();
   };
 
   const handleEmisorChange = (e: React.ChangeEvent<HTMLInputElement>) => {
