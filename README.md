@@ -24,7 +24,7 @@
 La aplicación consume una API externa para obtener los datos de los cómics (por ejemplo, la API pública de cómics).
 https://developer.marvel.com/
 
-## Responsive & accesibilidad
+## Responsive
 - Diseño desktop-first: la UI se adapta a pantallas pequeñas y grandes.
 
 ## Ejecutar aplicacion
